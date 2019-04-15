@@ -1,15 +1,28 @@
 /*
- Name:		Due.ino
- Created:	15/04/2019 13:17:59
- Author:	chris
-*/
+ * DUE.ino
+ *
+ * Created: 4/2/2019 11:18:27 PM
+ * Author:	Christoher Roldan Sanchez
+ * Email:	Christopher_rol@hotmail.es
+ *
+ */
+#include "configuracion.h"
+#include "estados.h"
 
-// the setup function runs once when you press reset or power the board
+estado does(0);
+iniciar_declarar IO(19200, 9600);											//objeto que declara IO, Comunicaciones 
+
+
 void setup() {
-
+	IO.serial();
+	IO.outputs();
+	IO.inputs();
+	IO.dispositivos();
+	IO.memoriaSD();
+	does.config();
 }
 
-// the loop function runs over and over again until power down or reset
 void loop() {
-  
+	does.permanente();														// estado que se repite permanentemente
+	does.select_estado();													// aqui se selecciona el estado actual
 }
