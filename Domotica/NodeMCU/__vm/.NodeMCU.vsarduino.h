@@ -109,6 +109,6 @@ typedef long __PTRDIFF_TYPE__;
 #define interrupts() sei()
 #define noInterrupts() cli()
 
-#include "Due.ino"
+#include "NodeMCU.ino"
 #endif
 #endif

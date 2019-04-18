@@ -6,6 +6,7 @@
  * Email:	Christopher_rol@hotmail.es
  *
  */
+#include "estados_esp8266.h"
 #include "configuracion.h"
 #include "estados.h"
 

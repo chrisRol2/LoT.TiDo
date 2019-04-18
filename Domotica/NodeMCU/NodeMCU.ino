@@ -3,13 +3,13 @@
  Created:	15/04/2019 13:20:45
  Author:	chris
 */
-
-// the setup function runs once when you press reset or power the board
+#include <BlynkSimpleEsp8266.h>
+#include <ESP8266WiFi.h>
 void setup() {
 
 }
 
-// the loop function runs over and over again until power down or reset
+
 void loop() {
   
 }
