@@ -27,6 +27,6 @@
 #define	RECEIVE_BT_ENABLE		'b'
 #define	RECEIVE_ESTADO			'e'
 #define	RECEIVE_MOVER_MENU		'/'
-#define	RECEIVE_1				' '
-#define	RECEIVE_2				' '
+#define	RECEIVE_VIENTO			'v'
+#define	RECEIVE_LLUVIA			'l'
 #define	RECEIVE_3				' '

@@ -11,8 +11,7 @@
 
 
 #endif
-void temporalizador(unsigned long retraso,
-	unsigned long* tiempo_control, void(*funcion)());
+
 class estados {
 private:
 public:

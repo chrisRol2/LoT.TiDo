@@ -18,6 +18,6 @@ void temporalizador(unsigned long retraso,
 }
 
 void estados::permanente(){
-	static long temp_ret = 900000;
-	//temporalizador(10000, &temp_ret, climaInte.send);
+	static long temp_ret = 90000000;
+	//temporalizador(10000, &temp_ret, climaInte.send(0));
 }

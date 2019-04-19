@@ -4,11 +4,19 @@
  Author:	chris
 */
 #include "estados_esp8266.h"
-void setup() {
+#include "WiFi_esp8266.h"
+config IO(4);
+estados DOIT;
 
+
+
+void setup() {
+	IO.init();
+	
 }
 
 
 void loop() {
-  
+	DOIT.permanente();
+	
 }

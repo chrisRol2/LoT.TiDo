@@ -65,4 +65,5 @@ C:\Users\chris\AppData\Local\Temp\VMBuilds\NodeMCU\esp8266_nodemcuv2\Debug\NodeM
  C:\Users\chris\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\cores\esp8266/debug.h \
  C:\Users\chris\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\variants\nodemcu/pins_arduino.h \
  C:\Users\chris\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\variants\nodemcu/../generic/common.h \
- C:\Users\chris\AppData\Local\Temp\VMBuilds\NodeMCU\esp8266_nodemcuv2\Debug\estados_esp8266.h
+ C:\Users\chris\AppData\Local\Temp\VMBuilds\NodeMCU\esp8266_nodemcuv2\Debug\estados_esp8266.h \
+ C:\Users\chris\AppData\Local\Temp\VMBuilds\NodeMCU\esp8266_nodemcuv2\Debug\WiFi_esp8266.h

@@ -12,3 +12,7 @@
 
 #endif
 
+class relojNTP{
+private:
+public:
+};

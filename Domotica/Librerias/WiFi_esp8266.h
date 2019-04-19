@@ -11,7 +11,24 @@
 
 
 #endif
+#define DHT_11 1
+#define DHT_22 2
 
+#define D0 17
+
+#define DHTPIN 17
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+class config{
+private:
+	int esclavo_due;
+public:
+	config(int _esclavo_due);
+	void init();
+};
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 class wifiInternet {
 private:
 public:
@@ -25,6 +42,9 @@ public:
 	void getRSSI();
 	void getEncrypt();
 };
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+//--------------------- RELOJ CALENDARIO NTP ------------------------------
 class reloj_calendarioW {
 private:
 	int husoHorario;
@@ -35,7 +55,7 @@ private:
 	int dia_semana_actual;
 	int mes_actual;
 	int anio_actual;
-	void refresh();
+	void refresh(void);
 public:
 	reloj_calendarioW(int _husoHorario);
 	int hora(void);
@@ -45,23 +65,32 @@ public:
 	int dia_semana(void);
 	int mes(void);
 	int anio(void);
-	int send();
-
+	int send(void);
 };
+//--------------------- RELOJ CALENDARIO NTP ------------------------------
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 class BlynkW {
 private:
 public:
 };
-class DHT_Tiempo : public DHTesp {
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+//------------------------ DHT SENSOR READ --------------------------------
+class DHT_Tiempo{
 private:
 	int dispositivo;
 	int pin;
 	float temperaturaCelsius;
 	float indiceCalor;
 	float humedad;
+	int viento;
+	int luzExterior;
+	int luzAPP;
+	int presion;
 	
 public:
-	DHT_Tiempo(int dispositivo) ;
+	DHT_Tiempo(int dispositivo, int pin) ;
 	int getTempC();
 	int	getTempF();
 	int	getHum();
@@ -73,5 +102,9 @@ public:
 	int setLightAPP(int light);
 	int getBarometroAPP();
 	int setBarometroAPP(int press);
+	static void send();
+	void refresh();
 
 };
+//------------------------DHT SENSOR READ----------------------------------
+//-------------------------------------------------------------------------
