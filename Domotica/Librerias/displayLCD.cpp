@@ -11,6 +11,8 @@
 #include "displayLCD.h"
 #include "pinesIO.h"
 #include "interrupciones.h"
+#include <Wire.h>
+#include "version.h"
 
 byte grados_c[8] = {
 	B01000,
@@ -111,6 +113,7 @@ void display::customCharALL() {
 }
 
 bool display::init() {
+	Wire.begin();
 	Wire.beginTransmission(0x27);
 	if (Wire.endTransmission() == 0) {
 		Serial.println("LCD encontrado.");
@@ -134,16 +137,21 @@ void display::encender(uint8_t como = 0) {
 		brillo(i);
 		if (como) {
 			if (i == 255) {
-				setCursor(5, 1);
+				setCursor(5, 0);
 				print("## HOLA ##");
 			}
 			if (i == 521) {
 				setCursor(5, 2);
 			}
-			if (i == 3200) {
-				setCursor(3, 1);
-				print(version);
+			if (i > 3000) {
+				setCursor(8, 3);
+				print(VERSION);
+				setCursor(6, 2);
+				print(NAME);
 				Serial.println(version);
+			}
+			else {
+				//delayMicroseconds(1);
 			}
 		}
 		if (i == 128) {
@@ -151,6 +159,7 @@ void display::encender(uint8_t como = 0) {
 			clear();
 		}
 	}
+	//delay(500);
 }
 
 void display::apagar(uint8_t como = 0) {
@@ -174,14 +183,14 @@ void display::apagar(uint8_t como = 0) {
 
 }
 
-void display::imprimir(uint8_t x, uint8_t y, String dato) {
+void display::imprimir(int x, int y, String dato) {
 
 	setCursor(x, y);
 	print(dato);
 
 }
 
-void display::imprimir(uint8_t x, uint8_t y, int dato) {// entero
+void display::imprimir(int x, int y, int dato) {// entero
 
 	setCursor(x, y);
 	print(dato);
@@ -206,22 +215,26 @@ void display::brillo(uint32_t _brilloV = 255) {
 	}
 }
 
-void display::printFecha(uint8_t x, uint8_t y, int dia, int dia_semana, int mes, int anio) {
+void display::printFecha(int x, int y, int dia, int dia_semana, int mes, int anio) {
 	const String dias[] = { "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" };
+	const String meses[] = { "Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic" };
 	gotoxy(x, y);
-	print(dias[dia_semana]); print(" ");
+	print(dias[1]); print(" ");
 	print(dia);
+	print(" ");
+	print(meses[mes]);
+
 }
 
-void display::printHora(uint8_t x, uint8_t y, int hora, int minutos, int segundos) {
+void display::printHora(int x, int y, int hora, int minutos, int segundos) {
 	gotoxy(x, y);
-	if (hora < 10)print("0");
+	if (hora < 10 && hora > -1)print("0");
 	print(hora); print(":");
-	if (minutos < 10) print("0");
+	if (minutos < 10 && minutos > -1) print("0");
 	print(minutos);
 }
 
-void display::printSimbolo(uint8_t x, uint8_t y, int simbolo) {
+void display::printSimbolo(int x, int y, int simbolo) {
 	gotoxy(x, y);
 	write(simbolo);
 }
@@ -231,13 +244,12 @@ void display::reset() {
 	noBlink(); /*display(); */noCursor();
 }
 
-void display::printClima(uint8_t x, uint8_t y, uint8_t valor, uint8_t valorF, int tipoClima) {
+void display::printClima(int x, int y, int valor, int valorF, int tipoClima) {
 	gotoxy(x, y);
 	switch (tipoClima) {
 	case temperaturaC:// temp
 		print(valor);
-		print(",");
-		print(valorF);
+		
 		write(2);
 		break;
 	case temperaturaH: //humedad
@@ -247,21 +259,19 @@ void display::printClima(uint8_t x, uint8_t y, uint8_t valor, uint8_t valorF, in
 	case temperaturaHIC: // indice de calor
 		print("HiC: ");
 		print(valor);
-		print(",");
-		print(valorF);
 		write(2);
 		break;
 	default:
 		break;
 	}
 }
-void display::printBT(uint8_t x, uint8_t y, bool BT_ESTADO) {
+void display::printBT(int x, int y, bool BT_ESTADO) {
 	gotoxy(x, y);
 	if (BT_ESTADO)write(5);
 	else print(" ");
 }
-void display::printWiFi(uint8_t x, uint8_t y, bool WIFI_ESTADO) {
+void display::printWiFi(int x, int y, bool WIFI_ESTADO) {
 	gotoxy(x, y);
-	if (WIFI_ESTADO)write(5);
+	if (WIFI_ESTADO)write(3);
 	else print(" ");
 }
