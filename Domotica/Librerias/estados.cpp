@@ -27,6 +27,7 @@ void estado::config(void) {
 void estado::permanente(void) {
 	static unsigned long ret = 0;
 	intept.temporalizador(1000, &ret, home);
+
 	return;
 }
 void estado::select_estado(void) {
@@ -39,7 +40,7 @@ void estado::home(void) {
 	lcd.reset();
 	lcd.printHora(0, 0, wifi.getHora(), wifi.getMinutos(),
 		wifi.getSegundos());
-	lcd.printFecha(6, 0, wifi.getDiaS(), wifi.getDia(), wifi.getMes(),
+	lcd.printFecha(6, 0, wifi.getDia(), wifi.getDiaS(), wifi.getMes(),
 		wifi.getAnio());
 	lcd.printClima(0, 1, wifi.getCelsius(), 0, temperaturaC);
 	lcd.printClima(-1, 1, wifi.getHumedad(), 0, temperaturaH);
