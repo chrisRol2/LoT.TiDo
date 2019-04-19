@@ -13,9 +13,9 @@ void receiveEvent(int howMany);
 void requestEvent();
 
 int hora = -1, minutos = -1, segundos = -1;
-int	dia = -1, diaS = -1, mes = -1, anio = -1;
+int	dia = 0, diaS = 0, mes = 0, anio = 2019;
 int gradosC = -90, hic = -90, humedadP = -1;
-bool BtEnable = 0, door = 0, WiFiEnable = 0;
+bool BtEnable = 1, door = 1, WiFiEnable = 1;
 
 
 int wifiN::getHora(void) {
