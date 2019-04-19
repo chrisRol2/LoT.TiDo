@@ -12,3 +12,11 @@
 
 #endif
 
+class estado {
+private:
+	int estado_actual;
+public:
+	estado(int _estado_actual) : estado_actual(_estado_actual) {}
+	void permanente();
+	void select_estado();
+};
