@@ -143,15 +143,12 @@ void display::encender(uint8_t como = 0) {
 			if (i == 521) {
 				setCursor(5, 2);
 			}
-			if (i > 3000) {
+			if (i == 3000) {
 				setCursor(8, 3);
 				print(VERSION);
 				setCursor(6, 2);
 				print(NAME);
 				Serial.println(version);
-			}
-			else {
-				//delayMicroseconds(1);
 			}
 		}
 		if (i == 128) {
@@ -159,7 +156,6 @@ void display::encender(uint8_t como = 0) {
 			clear();
 		}
 	}
-	//delay(500);
 }
 
 void display::apagar(uint8_t como = 0) {

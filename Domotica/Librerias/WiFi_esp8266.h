@@ -81,9 +81,9 @@ class DHT_Tiempo{
 private:
 	int dispositivo;
 	int pin;
-	float temperaturaCelsius;
-	float indiceCalor;
-	float humedad;
+	int temperaturaCelsius;
+	int indiceCalor;
+	int humedad;
 	int viento;
 	int luzExterior;
 	int luzAPP;
@@ -102,7 +102,7 @@ public:
 	int setLightAPP(int light);
 	int getBarometroAPP();
 	int setBarometroAPP(int press);
-	static void send();
+	void send();
 	void refresh();
 
 };

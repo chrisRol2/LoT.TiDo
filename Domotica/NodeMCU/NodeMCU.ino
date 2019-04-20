@@ -18,5 +18,4 @@ void setup() {
 
 void loop() {
 	DOIT.permanente();
-	
 }
