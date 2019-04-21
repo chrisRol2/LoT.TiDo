@@ -14,6 +14,10 @@
 #include <Wire.h>
 #include "version.h"
 
+const String dias[] = { "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" };
+const String meses[] = { "Ene","Feb","Mar","Abr","May","Jun","Jul",
+						 "Ago","Sep","Oct","Nov", "Dic" };
+
 byte grados_c[8] = {
 	B01000,
 	B10100,
@@ -148,6 +152,7 @@ void display::encender(uint8_t como = 0) {
 				print(VERSION);
 				setCursor(6, 2);
 				print(NAME);
+				Serial.print("Version: ");
 				Serial.println(version);
 			}
 		}
@@ -212,13 +217,11 @@ void display::brillo(uint32_t _brilloV = 255) {
 }
 
 void display::printFecha(int x, int y, int dia, int dia_semana, int mes, int anio) {
-	const String dias[] = { "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" };
-	const String meses[] = { "Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic" };
 	gotoxy(x, y);
-	print(dias[1]); print(" ");
+	print(dias[dia_semana - 1]); print(" ");
 	print(dia);
 	print(" ");
-	print(meses[mes]);
+	print(meses[mes - 1]);
 
 }
 
@@ -245,7 +248,7 @@ void display::printClima(int x, int y, int valor, int valorF, int tipoClima) {
 	switch (tipoClima) {
 	case temperaturaC:// temp
 		print(valor);
-		
+
 		write(2);
 		break;
 	case temperaturaH: //humedad
