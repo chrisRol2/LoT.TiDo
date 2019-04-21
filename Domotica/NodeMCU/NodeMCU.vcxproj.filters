@@ -33,6 +33,9 @@
     <ClInclude Include="..\Librerias\DHT_sensor_library_for_ESPx\DHTesp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Librerias\Reloj_NTP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Librerias\displayLCD.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Librerias\WiFi_esp8266.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Librerias\Reloj_NTP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
