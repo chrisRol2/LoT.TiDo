@@ -4,7 +4,7 @@
 
 #include "estados_esp8266.h"
 #include "version.h"
-#include "displayLCD.h"
+//#include "displayLCD.h"
 #include "WiFi_esp8266.h"
 #include "Wire.h"
 DHT_Tiempo climaInte(DHTPIN, DHT_11);
