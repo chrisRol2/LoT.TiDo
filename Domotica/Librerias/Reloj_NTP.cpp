@@ -5,22 +5,14 @@
 #include "Reloj_NTP.h"
 #include <TimeLib.h>
 #include <WiFiUdp.h>
+#include <ESP8266WiFi.h>
 
-
-// NTP Servers:
 static const char ntpServerName[] = "us.pool.ntp.org";
-//static const char ntpServerName[] = "time.nist.gov";
-//static const char ntpServerName[] = "time-a.timefreq.bldrdoc.gov";
-//static const char ntpServerName[] = "time-b.timefreq.bldrdoc.gov";
-//static const char ntpServerName[] = "time-c.timefreq.bldrdoc.gov";
 
-const int timeZone = 1;     // Central European Time
-//const int timeZone = -5;  // Eastern Standard Time (USA)
-//const int timeZone = -4;  // Eastern Daylight Time (USA)
-//const int timeZone = -8;  // Pacific Standard Time (USA)
-//const int timeZone = -7;  // Pacific Daylight Time (USA)
-
-
+int timeZone = -3;
+void setZonaHoraria(int huso){
+	timeZone = huso;
+}
 WiFiUDP Udp;
 unsigned int localPort = 8888;  // local port to listen for UDP packets
 
@@ -29,8 +21,31 @@ void digitalClockDisplay();
 void printDigits(int digits);
 void sendNTPpacket(IPAddress& address);
 
-time_t prevDisplay = 0; // when the digital clock was displayed
+void getHora(int* hora, int* minutos, int* segundos){
+	*hora = hour();
+	*minutos = minute();
+	*segundos = second();
+}
+void getFecha(int* dia, int* dia_semana, int* mes, int* anio){
+	*dia = day();
+	*dia_semana = weekday();
+	*mes = month();
+	*anio = year();
+}
 
+
+
+
+void conectar_NTP(){
+	Serial.println("Starting UDP");
+	Udp.begin(localPort);
+	Serial.print("Local port: ");
+	Serial.println(Udp.localPort());
+	Serial.println("waiting for sync");
+	setSyncProvider(getNtpTime);
+	setSyncInterval(300);
+}
+time_t prevDisplay = 0; // when the digital clock was displayed
 
 void digitalClockDisplay()
 {
@@ -56,7 +71,7 @@ void printDigits(int digits)
 	Serial.print(digits);
 }
 
-/*-------- NTP code ----------*/
+/*----------------------------- NTP code ---------------------------------*/
 
 const int NTP_PACKET_SIZE = 48; // NTP time is in the first 48 bytes of message
 byte packetBuffer[NTP_PACKET_SIZE]; //buffer to hold incoming & outgoing packets

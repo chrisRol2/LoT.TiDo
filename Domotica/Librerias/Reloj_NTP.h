@@ -12,7 +12,8 @@
 
 #endif
 
-class relojNTP{
-private:
-public:
-};
+void conectar_NTP();
+void digitalClockDisplay();
+void setZonaHoraria(int huso);
+void getHora(int *hora, int *minutos,int *segundos);
+void getFecha(int *dia, int *dia_semana, int *mes, int *anio);
