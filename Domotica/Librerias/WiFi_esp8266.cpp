@@ -9,6 +9,7 @@
 #include "Reloj_NTP.h"
 #include "DHTesp.h"
 #include <Wire.h>
+#include "Constantes_i2c.h"
 
 int EsclavoDueP = 4;
 //------------------------ DHT SENSOR READ --------------------------------
@@ -25,23 +26,26 @@ DHT_Tiempo::DHT_Tiempo(int dispositivo, int pin) {
 
 }
 void DHT_Tiempo::send() {
-	int clima[] = { getTempC(),getTempF(),getHum(),getHiC(),
+	int clima[] = { getTempC(),getHum(),getHiC(),
 		getViento(),getLuzExterior(),getLluvia(),getLightAPP(),
 		getBarometroAPP() };
-	const char selectorClima[] = { 't','f','h','H','X','v','l','L','P' };
-	Wire.beginTransmission(EsclavoDueP);
+	const char selectorClima[] = { RECEIVE_TEMP_DHT,
+		RECEIVE_HUMEDAD_DHT,RECEIVE_HIC_DHT,RECEIVE_VIENTO,RECEIVE_LUZ_EXT,
+		RECEIVE_LLUVIA,RECEIVE_LUX,RECEIVE_BAROMETRO };
+
 	Serial.println("---------------------------------------");
 	for (int i = 0; i < sizeof(clima) / 4; i++) {
+		Wire.beginTransmission(4);
 		Wire.write(selectorClima[i]);
 		Wire.write(clima[i]);
-		Serial.println(" ");
 		Serial.print(selectorClima[i]);
 		Serial.print(": ");
 		Serial.println(clima[i]);
-		Serial.println(" ");
+		Wire.endTransmission();
+		delayMicroseconds(100);
 	}
 	Serial.println("---------------------------------------");
-	Wire.endTransmission();
+
 
 }
 void DHT_Tiempo::refresh() {
@@ -60,6 +64,7 @@ int DHT_Tiempo::getTempF() {
 }
 int DHT_Tiempo::getHiC() {
 	indiceCalor = dht.computeHeatIndex(temperaturaCelsius, humedad, false);
+	return indiceCalor;
 }
 int DHT_Tiempo::getViento() {
 	return viento;
@@ -85,12 +90,8 @@ config::config(int _esclavo_due) {
 
 }
 void config::init() {
-	Wire.begin(74880);
+	Wire.begin();
 	Serial.begin(74880);
-	Wire.beginTransmission(4);
-	Wire.write('t');
-	Wire.write(20);
-	Wire.endTransmission();
 }
 //------------------------ CONFIGURACIONES --------------------------------
 //-------------------------------------------------------------------------

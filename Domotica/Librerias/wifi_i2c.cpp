@@ -12,9 +12,10 @@
 void receiveEvent(int howMany);
 void requestEvent();
 
-int hora = -1, minutos = -1, segundos = -1;
+int hora = 0, minutos = 0, segundos = 0;
 int	dia = 0, diaS = 0, mes = 0, anio = 2019;
-int gradosC = -90, hic = -90, humedadP = -1;
+int gradosC = 0, hic = 0, humedadP = 0, viento = 0, luz_ext = 0,
+	lluvia = 0, lux = 0, barometro = 0;
 bool BtEnable = 1, door = 1, WiFiEnable = 1;
 
 
@@ -65,47 +66,29 @@ void wifiN::config() {
 }
 
 void receiveEvent(int howMany) {
-
-}
-
-void requestEvent(void) {
-	volatile unsigned char REC = Wire1.read();
-
+	volatile char REC = Wire1.read();
+	Serial.print("Orden: "); Serial.println(REC);
 	switch (REC) {
 	case RECEIVE_HORA:
-		hora = Wire1.read();
+		hora =  Wire1.read();
 		break;
 	case RECEIVE_MINUTOS:
-		minutos = Wire1.read();
+		minutos =  Wire1.read();
 		break;
 	case RECEIVE_SEGUNDOS:
-		segundos = Wire1.read();
+		segundos =  Wire1.read();
 		break;
 	case RECEIVE_DIA:
-		dia = Wire1.read();
+		dia =  Wire1.read();
 		break;
 	case RECEIVE_DIA_SEMANA:
-		diaS = Wire1.read();
+		diaS =  Wire1.read();
 		break;
 	case RECEIVE_MES:
-		mes = Wire1.read();
+		mes =  Wire1.read();
 		break;
 	case RECEIVE_ANIO:
-		anio = Wire1.read();
-		break;
-	case RECEIVE_TIRA_RGB:
-		break;
-	case RECEIVE_ESTUFA:
-		break;
-	case RECEIVE_LUX:
-		break;
-	case RECEIVE_NIVEL_LUZ:
-		break;
-	case RECEIVE_BAROMETRO:
-		break;
-	case RECEIVE_CASA:
-		break;
-	case RECEIVE_TEMP_DESEADA:
+		anio =  Wire1.read();
 		break;
 	case RECEIVE_DOOR:
 		door = Wire1.read();
@@ -113,8 +96,14 @@ void requestEvent(void) {
 	case RECEIVE_TEMP_DHT:
 		gradosC = Wire1.read();
 		break;
+	case RECEIVE_VIENTO:
+		viento = Wire1.read();
+		break;
 	case RECEIVE_HUMEDAD_DHT:
 		humedadP = Wire1.read();
+		break;
+	case RECEIVE_LUZ_EXT:
+		luz_ext = Wire1.read();
 		break;
 	case RECEIVE_HIC_DHT:
 		hic = Wire1.read();
@@ -122,13 +111,23 @@ void requestEvent(void) {
 	case RECEIVE_BT_ENABLE:
 		BtEnable = Wire1.read();
 		break;
-	case RECEIVE_ESTADO:
+	case RECEIVE_LLUVIA:
+		lluvia = Wire1.read();
 		break;
-	case RECEIVE_MOVER_MENU:
+	case RECEIVE_LUX:
+		lux = Wire1.read();
 		break;
-		// 	case:
-		// 		break;
+	case RECEIVE_BAROMETRO:
+		barometro = Wire1.read();
+		break;
 	default:
+		Serial.println("error");
+		volatile int mierda = Wire1.read();
+		Serial.println(mierda);
 		break;
 	}
+}
+
+void requestEvent(void) {
+	
 }
