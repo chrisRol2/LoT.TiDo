@@ -12,7 +12,7 @@
 void receiveEvent(int howMany);
 void requestEvent();
 
-int hora = 0, minutos = 0, segundos = 0;
+int hora = 10, minutos = 0, segundos = 0;
 int	dia = 0, diaS = 0, mes = 0, anio = 2019;
 int gradosC = 0, hic = 0, humedadP = 0, viento = 0, luz_ext = 0,
 	lluvia = 0, lux = 0, barometro = 0;
@@ -67,7 +67,6 @@ void wifiN::config() {
 
 void receiveEvent(int howMany) {
 	volatile char REC = Wire1.read();
-	Serial.print("Orden: "); Serial.println(REC);
 	switch (REC) {
 	case RECEIVE_HORA:
 		hora =  Wire1.read();
@@ -85,7 +84,7 @@ void receiveEvent(int howMany) {
 		diaS =  Wire1.read();
 		break;
 	case RECEIVE_MES:
-		mes =  Wire1.read();
+		mes = Wire1.read();
 		break;
 	case RECEIVE_ANIO:
 		anio =  Wire1.read();
