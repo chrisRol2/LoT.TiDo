@@ -31,16 +31,25 @@ public:
 //-------------------------------------------------------------------------
 class wifiInternet {
 private:
+	String ssid;
+	String password;
+	int n_ssid;
+	int select_wifi;
 public:
-	void conectar();
+	wifiInternet(String _ssid, String _password) : ssid(_ssid),
+		password(_password) {}
+	bool conectar();
+	void encender();
 	void desconetar();
+	void reset();
 	void leer_wifis();
-	void controlar();
-	void seleccionar();
 	void imprimir();
-	void getSSID();
-	void getRSSI();
-	void getEncrypt();
+	void seleccionar(int select_n);
+	String getSSID();
+	int getRSSI();
+	bool getEncrypt();
+	void setSSID();
+	void setRSSI();	
 };
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
@@ -65,7 +74,7 @@ public:
 	int dia_semana(void);
 	int mes(void);
 	int anio(void);
-	int send(void);
+	void send(void);
 };
 //--------------------- RELOJ CALENDARIO NTP ------------------------------
 //-------------------------------------------------------------------------
