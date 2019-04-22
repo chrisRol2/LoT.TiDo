@@ -10,13 +10,18 @@
 #include "DHTesp.h"
 #include <Wire.h>
 #include "Constantes_i2c.h"
+#include <string.h>
 
 const char* ssid = "RSC-2.4GHz";
 const char* password = "23554243";
+char key_Blynk[] = "8e5c3a46ecc84586bd41462456fd5f42";
 
 int EsclavoDueP = 4;
+wifiInternet wifi("RSC-2.4GHz", "23554243");
 //------------------------ DHT SENSOR READ --------------------------------
 DHTesp dht;
+
+WidgetLCD lcd_clima(V9);
 DHT_Tiempo::DHT_Tiempo(int dispositivo, int pin) {
 	switch (dispositivo) {
 	case 1:
@@ -41,15 +46,16 @@ void DHT_Tiempo::send() {
 		Wire.beginTransmission(4);
 		Wire.write(selectorClima[i]);
 		Wire.write(clima[i]);
-// 		Serial.print(selectorClima[i]);
-// 		Serial.print(": ");
-// 		Serial.println(clima[i]);
+		// 		Serial.print(selectorClima[i]);
+		// 		Serial.print(": ");
+		// 		Serial.println(clima[i]);
 		Wire.endTransmission();
 		delayMicroseconds(100);
 	}
 	//Serial.println("---------------------------------------");
-
-
+	lcd_clima.clear();
+	lcd_clima.print(0, 0, wifi.getSSID());
+	
 }
 void DHT_Tiempo::refresh() {
 
@@ -87,7 +93,7 @@ int DHT_Tiempo::getBarometroAPP() {
 //------------------------DHT SENSOR READ----------------------------------
 //-------------------------------------------------------------------------
 //------------------------ CONFIGURACIONES --------------------------------
-wifiInternet wifi("RSC-2.4GHz", "23554243");
+
 config::config(int _esclavo_due) {
 	esclavo_due = _esclavo_due;
 	EsclavoDueP = esclavo_due;
@@ -99,11 +105,13 @@ void config::init() {
 	if (wifi.conectar()) {
 		conectar_NTP();
 	}
+	else {
+	}
 }
 //------------------------ CONFIGURACIONES --------------------------------
 //-------------------------------------------------------------------------
 //--------------------- RELOJ CALENDARIO NTP ------------------------------
-reloj_calendarioW::reloj_calendarioW(int _husoHorario){
+reloj_calendarioW::reloj_calendarioW(int _husoHorario) {
 	husoHorario = _husoHorario;
 	setZonaHoraria(husoHorario);
 	conectar_NTP();
@@ -142,7 +150,7 @@ void reloj_calendarioW::send() {
 	Wire.write(RECEIVE_DIA_SEMANA);
 	Wire.write(dia_semana_actual);
 	Wire.endTransmission();
-	
+
 	Wire.beginTransmission(EsclavoDueP);
 	Wire.write(RECEIVE_MES);
 	Wire.write(mes_actual);
@@ -171,6 +179,7 @@ bool wifiInternet::conectar() {
 		if (rep > 20) {
 			Serial.println(" ");
 			Serial.println("Error al conectar");
+			wifi_status();
 			WiFi.mode(WIFI_OFF);
 			return false;
 		}
@@ -179,9 +188,13 @@ bool wifiInternet::conectar() {
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
 	Serial.print("Se conento exitosamente a: "); Serial.println(ssid);
+	wifi_status();
 	return true;
 }
 void wifiInternet::desconetar() {
+	Wire.write(RECEIVE_WIFI_STATUS);
+	Wire.write(0);
+	Wire.endTransmission();
 	WiFi.mode(WIFI_OFF); Serial.print("Se desconecto el WIFI: ");
 	Serial.println(ssid);
 }
@@ -216,7 +229,7 @@ void wifiInternet::seleccionar(int select_n) {
 	select_wifi = select_n;
 }
 String wifiInternet::getSSID() {
-	return WiFi.SSID(select_wifi);
+	return ssid;
 }
 int wifiInternet::getRSSI() {
 	return WiFi.RSSI(select_wifi);
@@ -225,7 +238,37 @@ bool wifiInternet::getEncrypt() {
 	if (WiFi.encryptionType(select_wifi) == ENC_TYPE_NONE)return false;
 	else return true;
 }
-
+bool wifiInternet::status() {
+	if (WiFi.status() != WL_CONNECTED) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
+}
+void wifi_status(void) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_WIFI_STATUS);
+	Wire.write(wifi.status());
+	Wire.endTransmission();
+}
 //----------------------- WIFI INTERNET -----------------------------------
 //-------------------------------------------------------------------------
+//----------------------- BLYNK CONECT ------------------------------------
+BlynkW::BlynkW(char _auth[]) {
+	strcpy(auth, _auth);
+}
+void BlynkW::init(){
+	if (wifi.status())Blynk.begin(auth, "Mi WiFi", "wifipass");
+}
+void BlynkW::run() {
+	if(wifi.status())Blynk.run();
+}
+BLYNK_WRITE(V4){
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_BT_ENABLE);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//----------------------- BLYNK CONECT ------------------------------------
 //-------------------------------------------------------------------------

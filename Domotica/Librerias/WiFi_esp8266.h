@@ -50,7 +50,9 @@ public:
 	bool getEncrypt();
 	void setSSID();
 	void setRSSI();	
+	bool status();
 };
+void wifi_status(void);
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
 //--------------------- RELOJ CALENDARIO NTP ------------------------------
@@ -81,7 +83,11 @@ public:
 //-------------------------------------------------------------------------
 class BlynkW {
 private:
+	char auth[];
 public:
+	BlynkW(char _auth[]);
+	void run();
+	void init();
 };
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
@@ -97,6 +103,7 @@ private:
 	int luzExterior;
 	int luzAPP;
 	int presion;
+	
 	
 public:
 	DHT_Tiempo(int dispositivo, int pin) ;
