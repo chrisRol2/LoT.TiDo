@@ -6,6 +6,7 @@
  * Email:	Christopher_rol@hotmail.es
  *
  */
+#include "blynk_bt.h"
 #include "configuracion.h"
 #include "estados.h"
 
@@ -19,6 +20,7 @@ void setup() {
 	IO.inputs();
 	IO.dispositivos();
 	IO.memoriaSD();
+	IO.bluetooth();
 	does.config();
 }
 

@@ -136,5 +136,6 @@ C:\Users\chris\AppData\Local\Temp\VMBuilds\Due\arduino_due_x_dbg\Debug\Due.cpp.o
  C:\Users\chris\AppData\Local\arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino/USB/USBAPI.h \
  C:\Users\chris\AppData\Local\arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino/RingBuffer.h \
  C:\Users\chris\AppData\Local\arduino15\packages\arduino\hardware\sam\1.6.12\cores\arduino/Stream.h \
+ C:\Users\chris\AppData\Local\Temp\VMBuilds\Due\arduino_due_x_dbg\Debug\blynk_bt.h \
  C:\Users\chris\AppData\Local\Temp\VMBuilds\Due\arduino_due_x_dbg\Debug\configuracion.h \
  C:\Users\chris\AppData\Local\Temp\VMBuilds\Due\arduino_due_x_dbg\Debug\estados.h

@@ -51,6 +51,9 @@
     <ClInclude Include="..\Librerias\wifi_i2c.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Librerias\blynk_bt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Librerias\configuracion.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Librerias\wifi_i2c.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Librerias\blynk_bt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
