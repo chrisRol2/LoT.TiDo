@@ -17,6 +17,7 @@ class estados {
 private:
 public:
 	estados() {}
+	void config();
 	void permanente();
 	void select_estado();
 };
