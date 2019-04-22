@@ -11,9 +11,11 @@
 #include "displayLCD.h"
 #include "wifi_i2c.h"
 #include "configuracion.h"
+#include "blynk_bt.h"
 display lcd(0x27, VERSION, 4, 20);
 wifiN wifi(4);
 interrupciones intept(1);
+Blynk_bt APP("7a312d29e2d24f6b80f71b8a1a16cce4");
 void estado::config(void) {
 	intept.init();
 	lcd.init();
@@ -21,7 +23,9 @@ void estado::config(void) {
 	lcd.customCharALL();
 	lcd.encender(true);
 }
-
+void bt_run(){
+//	APP.run();
+}
 
 
 void estado::permanente(void) {
