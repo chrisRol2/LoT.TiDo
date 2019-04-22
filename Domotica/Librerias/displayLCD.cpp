@@ -97,7 +97,8 @@ byte reloj_icon[8] = {
 	B00000,
 };
 
-display::display(uint8_t _adr, String _version, int _fila, int _columnas) : LiquidCrystal_PCF8574(_adr) {
+display::display(uint8_t _adr, String _version, 
+	int _fila, int _columnas) : LiquidCrystal_PCF8574(_adr) {
 
 	version = _version;
 	filas = _fila;
