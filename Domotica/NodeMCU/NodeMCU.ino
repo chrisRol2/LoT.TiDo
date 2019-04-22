@@ -12,6 +12,7 @@ estados DOIT;
 
 void setup() {
 	IO.init();
+	DOIT.config();
 	
 }
 

@@ -18,4 +18,5 @@ public:
 	estados() {}
 	void permanente();
 	void select_estado();
+	void config();
 };
