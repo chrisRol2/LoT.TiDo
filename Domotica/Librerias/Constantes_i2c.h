@@ -11,6 +11,7 @@
 #define	RECEIVE_SEGUNDOS		'S'
 #define	RECEIVE_DIA				'D'
 #define	RECEIVE_DIA_SEMANA		'w'
+#define	RECEIVE_WIFI_STATUS		'W'
 #define	RECEIVE_MES				'm'
 #define	RECEIVE_ANIO			'A'
 #define	RECEIVE_TIRA_RGB		'R'
