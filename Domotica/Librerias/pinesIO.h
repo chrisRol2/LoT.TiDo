@@ -30,6 +30,7 @@
 #define pin_BRILLO_LCD 6 //
 const char pin_RGBW[4] = {pin_RED, pin_GREEN, pin_BLUE, pin_WHITE}; //
 #define pin_cooler 12//
+#define pin_luz_labo 49
 
 //DIGITAL
 #define pin_I2C_INTERRUPCION 22 //
@@ -56,3 +57,8 @@ const char pin_RGBW[4] = {pin_RED, pin_GREEN, pin_BLUE, pin_WHITE}; //
 #define pin_HDMI_1 42 //
 #define pin_HDMI_2 43 //
 #define pin_HDMI_3 44 //
+
+#define pin_luz_techo	45
+#define pin_luz_balcon	46
+#define pin_luz_cama	47
+#define pin_luz_techo	48

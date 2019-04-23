@@ -11,10 +11,18 @@
 #include "displayLCD.h"
 #include "wifi_i2c.h"
 #include "configuracion.h"
+#include "luces.h"
+#include "pinesIO.h"
 //#include "blynk_bt.h"
 display lcd(0x27, VERSION, 4, 20);
 wifiN wifi(4);
 interrupciones intept(1);
+lampara luz_techo(false, false, pin_luz_techo);
+lampara luz_balcon(false, false, pin_luz_balcon);
+lampara luz_cama(false, false, pin_luz_cama);
+lampara luz_labo(false, true, pin_luz_labo);
+
+lampara luz_escritorio(true, pin_RED, pin_GREEN, pin_BLUE);
 //Blynk_bt APP("7a312d29e2d24f6b80f71b8a1a16cce4");
 void estado::config(void) {
 	intept.init();
