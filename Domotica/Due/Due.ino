@@ -11,7 +11,7 @@
 #include "estados.h"
 
 estado does(0);
-iniciar_declarar IO(19200, 9600);											//objeto que declara IO, Comunicaciones 
+iniciar_declarar IO(74880, 9600);											//objeto que declara IO, Comunicaciones 
 
 
 void setup() {
