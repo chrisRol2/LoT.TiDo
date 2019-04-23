@@ -22,6 +22,9 @@ void reloj_send(void) {
 void app_run(){
 	APP.run();
 }
+void app_lcd_sist(){
+	APP.lcdSist();
+}
 
 void temporalizador(unsigned long retraso,
 	unsigned long* tiempo_control, void(*funcion)()) {
@@ -35,9 +38,11 @@ void estados::permanente(){
 	static unsigned long temp_ret = 9000;
 	static unsigned long reloj_ret = 8500;
 	static unsigned long wifi_ret = 9050;
+	static unsigned long lcdSist_ret = 1000;
 	temporalizador(1000, &temp_ret, clima_send);
 	temporalizador(1000, &reloj_ret, reloj_send);
 	temporalizador(5000, &wifi_ret, wifi_status);
+	temporalizador(60000, &lcdSist_ret, app_lcd_sist);
 	APP.run();
 	
 }
