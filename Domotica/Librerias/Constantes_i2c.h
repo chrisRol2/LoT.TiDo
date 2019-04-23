@@ -29,7 +29,18 @@
 #define	RECEIVE_LUZ_EXT			'K'
 #define	RECEIVE_BT_ENABLE		'b'
 #define	RECEIVE_ESTADO			'e'
-#define	RECEIVE_MOVER_MENU		'/'
+#define	RECEIVE_MOVER_MENU_UP	'/'
+#define	RECEIVE_MOVER_MENU_DOWN	'{'
 #define	RECEIVE_VIENTO			'v'
 #define	RECEIVE_LLUVIA			'l'
-#define	RECEIVE_3				' '
+#define	RECEIVE_LUZ_TECHO		'1'
+#define	RECEIVE_LUZ_BALCON		'2'
+#define	RECEIVE_LUZ_CAMA		'3'
+#define	RECEIVE_LUZ_LABO		'4'
+#define	RECEIVE_CLIMA_SELECTOR	'5'//
+#define	RECEIVE_CORTINA			'6'
+#define	RECEIVE_VENTANA			'7'
+
+
+
+

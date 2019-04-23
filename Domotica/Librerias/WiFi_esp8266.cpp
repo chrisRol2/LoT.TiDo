@@ -3,7 +3,6 @@
 // 
 
 #include "WiFi_esp8266.h"
-
 #include <BlynkSimpleEsp8266.h>
 #include <ESP8266WiFi.h>
 #include "Reloj_NTP.h"
@@ -267,6 +266,135 @@ void BlynkW::run() {
 BLYNK_WRITE(V4){
 	Wire.beginTransmission(4);
 	Wire.write(RECEIVE_BT_ENABLE);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//LUCES
+BLYNK_WRITE(V10) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_LUZ_TECHO);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+BLYNK_WRITE(V11) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_LUZ_CAMA);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+BLYNK_WRITE(V12) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_LUZ_BALCON);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+BLYNK_WRITE(V13) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_LUZ_LABO);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+BLYNK_WRITE(V14) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_NIVEL_LUZ);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//FIN LUCES
+//TEMP DESEADA
+BLYNK_WRITE(V8) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_TEMP_DESEADA);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//BAROMETRO
+BLYNK_WRITE(V17) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_BAROMETRO);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//NIVEL DE LUZ
+BLYNK_WRITE(V16) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_LUX);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//CASA GPS
+BLYNK_WRITE(V20) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_CASA);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//ESTADO
+BLYNK_WRITE(V23) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_ESTADO);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//NAVEGADOR SUBIR
+BLYNK_WRITE(V21) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_MOVER_MENU_UP);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//NAVEGADOR BAJAR
+BLYNK_WRITE(V22) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_MOVER_MENU_DOWN);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//NAVEGADOR SELECT
+BLYNK_WRITE(V21) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_MOVER_MENU_DOWN);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//SELECTOR CLIIMA
+BLYNK_WRITE(V7) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_CLIMA_SELECTOR);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//CORTINA
+BLYNK_WRITE(V18) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_CORTINA);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//VENTANA
+BLYNK_WRITE(V15) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_VENTANA);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//ESTUFA
+BLYNK_WRITE(V25) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_ESTUFA);
+	Wire.write(param.asInt());
+	Wire.endTransmission();
+}
+//TIRA RGB
+BLYNK_WRITE(V19) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_TIRA_RGB);
+	for (int i = 0; i < 3; i++ )Wire.write(param[i].asInt());
+	Wire.endTransmission();
+}
+BLYNK_WRITE(V26) {
+	Wire.beginTransmission(4);
+	Wire.write(RECEIVE_DOOR);
 	Wire.write(param.asInt());
 	Wire.endTransmission();
 }
