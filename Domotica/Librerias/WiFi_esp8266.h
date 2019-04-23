@@ -34,7 +34,7 @@ private:
 	String ssid;
 	String password;
 	int n_ssid;
-	int select_wifi;
+	int select_wifi = 1;
 public:
 	wifiInternet(String _ssid, String _password) : ssid(_ssid),
 		password(_password) {}
@@ -88,6 +88,7 @@ public:
 	BlynkW(char _auth[]);
 	void run();
 	void init();
+	void lcdSist();
 };
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
