@@ -20,7 +20,7 @@ wifiInternet wifi("RSC-2.4GHz", "23554243");
 //------------------------ DHT SENSOR READ --------------------------------
 DHTesp dht;
 
-WidgetLCD lcd_clima(V9);
+
 DHT_Tiempo::DHT_Tiempo(int dispositivo, int pin) {
 	switch (dispositivo) {
 	case 1:
@@ -51,10 +51,7 @@ void DHT_Tiempo::send() {
 		Wire.endTransmission();
 		delayMicroseconds(100);
 	}
-	//Serial.println("---------------------------------------");
-	lcd_clima.clear();
-	lcd_clima.print(0, 0, wifi.getSSID());
-	
+	//Serial.println("---------------------------------------");	
 }
 void DHT_Tiempo::refresh() {
 
@@ -188,6 +185,7 @@ bool wifiInternet::conectar() {
 	Serial.println(WiFi.localIP());
 	Serial.print("Se conento exitosamente a: "); Serial.println(ssid);
 	wifi_status();
+	Blynk.syncAll();
 	return true;
 }
 void wifiInternet::desconetar() {
@@ -228,10 +226,10 @@ void wifiInternet::seleccionar(int select_n) {
 	select_wifi = select_n;
 }
 String wifiInternet::getSSID() {
-	return ssid;
+	return WiFi.SSID();
 }
 int wifiInternet::getRSSI() {
-	return WiFi.RSSI(select_wifi);
+	return WiFi.RSSI();
 }
 bool wifiInternet::getEncrypt() {
 	if (WiFi.encryptionType(select_wifi) == ENC_TYPE_NONE)return false;
@@ -261,8 +259,36 @@ void BlynkW::init(){
 	if (wifi.status())Blynk.begin(auth, "Mi WiFi", "wifipass");
 }
 void BlynkW::run() {
-	if(wifi.status())Blynk.run();
+	if (wifi.status()) {
+		Blynk.run();
+	}
 }
+WidgetLCD lcd_sist(V9);
+int menuSist = 0;
+void BlynkW::lcdSist() {
+	switch (menuSist) {
+	case 1:
+		lcd_sist.clear();
+		lcd_sist.print(0, 0, wifi.getSSID());
+		lcd_sist.print(wifi.getSSID().length() +2, 0, 
+			(wifi.getEncrypt()) ? "Segu" : "Inse");
+		lcd_sist.print(0, 1, "Potencia: ");
+		lcd_sist.print(11, 1,wifi.getRSSI());
+		
+		break;
+	case 2:
+		lcd_sist.clear();
+		
+		break;
+	default:
+		Serial.println("Error");
+	}
+}
+BLYNK_WRITE(V27){
+	menuSist = param.asInt();
+	
+}
+//BLUETOOTH
 BLYNK_WRITE(V4){
 	Wire.beginTransmission(4);
 	Wire.write(RECEIVE_BT_ENABLE);
@@ -351,7 +377,7 @@ BLYNK_WRITE(V22) {
 	Wire.endTransmission();
 }
 //NAVEGADOR SELECT
-BLYNK_WRITE(V21) {
+BLYNK_WRITE(V24) {
 	Wire.beginTransmission(4);
 	Wire.write(RECEIVE_MOVER_MENU_DOWN);
 	Wire.write(param.asInt());
@@ -392,6 +418,7 @@ BLYNK_WRITE(V19) {
 	for (int i = 0; i < 3; i++ )Wire.write(param[i].asInt());
 	Wire.endTransmission();
 }
+//PUERTA
 BLYNK_WRITE(V26) {
 	Wire.beginTransmission(4);
 	Wire.write(RECEIVE_DOOR);
@@ -400,3 +427,4 @@ BLYNK_WRITE(V26) {
 }
 //----------------------- BLYNK CONECT ------------------------------------
 //-------------------------------------------------------------------------
+//*/
