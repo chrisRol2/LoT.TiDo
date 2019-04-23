@@ -68,6 +68,8 @@ void wifiN::config() {
 
 void receiveEvent(int howMany) {
 	volatile char REC = Wire1.read();
+	//Serial.println("Se recive dato");
+	int aa, ab, ac;
 	switch (REC) {
 	case RECEIVE_HORA:
 		hora =  Wire1.read();
@@ -122,6 +124,39 @@ void receiveEvent(int howMany) {
 		break;
 	case RECEIVE_WIFI_STATUS:
 		WiFiEnable = Wire1.read();
+		break;
+	case RECEIVE_LUZ_TECHO:
+		break;
+	case RECEIVE_LUZ_CAMA:
+		break;
+	case RECEIVE_LUZ_BALCON:
+		break;
+	case RECEIVE_LUZ_LABO:
+		break;
+	case RECEIVE_NIVEL_LUZ:
+		break;
+	case RECEIVE_TEMP_DESEADA:
+		break;
+	case RECEIVE_CASA:
+		break;
+	case RECEIVE_ESTADO:
+		break;
+	case RECEIVE_MOVER_MENU_UP:
+		break;
+	case RECEIVE_MOVER_MENU_DOWN:
+		break;
+	case RECEIVE_CLIMA_SELECTOR:
+		break;
+	case RECEIVE_CORTINA:
+		break;
+	case RECEIVE_VENTANA:
+		break;
+	case RECEIVE_ESTUFA:
+		break;
+	case RECEIVE_TIRA_RGB:
+		 aa = Wire1.read();
+		 ab = Wire1.read();
+		 ac = Wire1.read();
 		break;
 	default:
 		Serial.println("error");
