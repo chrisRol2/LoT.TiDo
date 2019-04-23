@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Domotica"
+    "\\Domotica",
+    "\\Domotica\\Librerias",
+    "\\Domotica\\NodeMCU"
   ],
-  "SelectedNode": "\\Domotica\\Domotica.sln",
+  "SelectedNode": "\\Domotica\\NodeMCU\\NodeMCU.ino",
   "PreviewInSolutionExplorer": false
 }

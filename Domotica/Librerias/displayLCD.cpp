@@ -114,7 +114,6 @@ void display::customCharALL() {
 	createChar(5, bt_icon);
 	createChar(6, estufa_icon);
 	createChar(7, reloj_icon);
-
 }
 
 bool display::init() {
