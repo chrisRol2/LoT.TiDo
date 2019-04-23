@@ -37,7 +37,7 @@
 #define	RECEIVE_LUZ_BALCON		'2'
 #define	RECEIVE_LUZ_CAMA		'3'
 #define	RECEIVE_LUZ_LABO		'4'
-#define	RECEIVE_CLIMA_SELECTOR	'5'//
+#define	RECEIVE_CLIMA_SELECTOR	'5'
 #define	RECEIVE_CORTINA			'6'
 #define	RECEIVE_VENTANA			'7'
 
