@@ -36,6 +36,8 @@ public:
 	void init(void);
 	void temporalizador(unsigned long retraso,
 		unsigned long* tiempo_control, void(*funcion)());
+	bool temporalizadorBool(unsigned long retraso,
+		unsigned long* tiempo_control);
 
 
 };

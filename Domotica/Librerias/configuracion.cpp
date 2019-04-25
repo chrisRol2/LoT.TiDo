@@ -85,5 +85,12 @@ void interrupciones::temporalizador(unsigned long retraso,
 		funcion(); 
 	}
 }
-
+bool interrupciones::temporalizadorBool(unsigned long retraso,
+	unsigned long* tiempo_control){
+	if (*tiempo_control < millis()) {
+		*tiempo_control = retraso + millis();
+		return true;
+	}
+	return false;
+}
 
