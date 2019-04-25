@@ -43,3 +43,4 @@ board.buildinfo
 *.sou
 *.db
 *.xml
+*.*.xml
