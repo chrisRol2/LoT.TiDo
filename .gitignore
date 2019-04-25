@@ -5,9 +5,13 @@
 *.slo
 *.lo
 *.o
+*.*.o
+board.buildinfo
 *.obj
 *.bin
 *.elf
+*ino.elf
+*ino.map
 *.map
 *.buildinfo
 

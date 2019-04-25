@@ -19,7 +19,6 @@ public:
 	void dispositivos();
 	void outputs();
 	void inputs();
-	void memoriaSD();
 	void bluetooth();
 };
 class interrupciones {

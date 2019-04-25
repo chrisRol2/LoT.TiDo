@@ -65,9 +65,6 @@ void iniciar_declarar::inputs() {
 		pinMode(pin_HDMI[i], INPUT);
 	}	
 }
-void iniciar_declarar::memoriaSD() {
-
-}
 
 void interrupciones::init(void) {
 	Serial.println("Se estan inicializando INTERRUPCIONES");

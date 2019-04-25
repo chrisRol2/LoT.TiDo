@@ -19,7 +19,6 @@ void setup() {
 	IO.outputs();
 	IO.inputs();
 	IO.dispositivos();
-	IO.memoriaSD();
 	IO.bluetooth();
 	does.config();
 }
