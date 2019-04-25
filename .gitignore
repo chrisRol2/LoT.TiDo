@@ -9,7 +9,7 @@
 *.bin
 *.elf
 *.map
-*buildinfo
+*.buildinfo
 
 # Precompiled Headers
 *.gch
@@ -38,3 +38,4 @@
 #vs
 *.sou
 *.db
+*.xml
