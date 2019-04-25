@@ -8,6 +8,7 @@
 #include <Wire.h>
 #include "wifi_i2c.h"
 #include "Constantes_i2c.h"
+#include "pinesIO.h"
 
 void receiveEvent(int howMany);
 void requestEvent();
@@ -59,11 +60,18 @@ bool wifiN::getDoor(void) {
 bool wifiN::getWifi(void) {
 	return WiFiEnable;
 }
-
-void wifiN::config() {
+void wifiN::reset(void){
+	pinMode(pin_RESET_WIFI, OUTPUT); digitalWrite(pin_RESET_WIFI, 1);
+	delay(100);
+	digitalWrite(pin_RESET_WIFI, 0);
+	delay(10);
+	digitalWrite(pin_RESET_WIFI, 1);
+}
+void wifiN::config(void) {
 	Wire1.begin(i2c_dir); 
 	Wire1.onReceive(receiveEvent);
 	Wire1.onRequest(requestEvent);
+	reset();
 }
 
 void receiveEvent(int howMany) {
