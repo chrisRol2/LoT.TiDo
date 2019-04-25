@@ -21,6 +21,7 @@
 #define pin_TEMP_LM35 A2 //
 #define pin_MQ2_ANALOGICO A3 //
 #define pin_DETECTOR_PUERTA A4 //
+#define pin_REF_ANALOGICA A5 //
 
 //PWM
 #define pin_RED 2 //
@@ -36,6 +37,9 @@ const char pin_RGBW[4] = {pin_RED, pin_GREEN, pin_BLUE, pin_WHITE}; //
 #define pin_I2C_INTERRUPCION 22 //
 #define pin_MQ_2 23 //
 #define pin_micro 24 //
+
+//RESET_NODEMCU
+#define pin_RESET_WIFI 53
 
 #define pin_PIR 26 //
 #define pin_BT_STATE 27 //
