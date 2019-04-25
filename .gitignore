@@ -6,6 +6,10 @@
 *.lo
 *.o
 *.obj
+*.bin
+*.elf
+*.map
+*buildinfo
 
 # Precompiled Headers
 *.gch
@@ -30,3 +34,7 @@
 *.exe
 *.out
 *.app
+
+#vs
+*.sou
+*.db
