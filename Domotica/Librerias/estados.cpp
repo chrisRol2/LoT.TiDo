@@ -13,7 +13,7 @@
 #include "configuracion.h"
 #include "luces.h"
 #include "pinesIO.h"
-//#include "blynk_bt.h"
+ //#include "blynk_bt.h"
 display lcd(0x27, VERSION, 4, 20);
 wifiN wifi(4);
 interrupciones intept(1);
@@ -42,21 +42,21 @@ void function_test() {
 	float a = 0;
 	int it = 1000;
 	delay(2);
-// 	for (int i = 0; i < it; i++) {
+	// 	for (int i = 0; i < it; i++) {
 	float b = analogRead(((pin_MQ2_ANALOGICO)));//* 3.3) /4096.0) / 100.0;
 
 // 		a += b;
- 		Serial.println(b);
-// 		delayMicroseconds(500);
-// 	}
+	Serial.println(b);
+	// 		delayMicroseconds(500);
+	// 	}
 	a /= it;
-// 	Serial.println(a);
-// 	Serial.print("ref: ");
-// 	Serial.println(analogRead(pin_REF_ANALOGICA));
+	// 	Serial.println(a);
+	// 	Serial.print("ref: ");
+	// 	Serial.println(analogRead(pin_REF_ANALOGICA));
 }
 
 void estado::permanente(void) {
-	static unsigned long ret = 0 , _test = 0;
+	static unsigned long ret = 0, _test = 0;
 	intept.temporalizador(1000, &ret, home);
 	//intept.temporalizador(500, &_test, function_test);
 
@@ -65,30 +65,26 @@ void estado::permanente(void) {
 void estado::select_estado(void) {
 	return;
 }
-void estado::navegador(int maximo, int minimo, int* seleccionador, 
+void estado::navegador(int maximo, int minimo, int* seleccionador,
 	int* menu) {
 	return;
 }
 void estado::home(void) {
 	static unsigned long ret = 0, ret2 = 0;
 	static bool control = true;
-	if (control){
-		lcd.reset();
+	if (control) {
+		lcd.imprimir(9, 2, "home");
+		control = false;
 	}
-	
-	if (intept.temporalizadorBool(60000, &ret) || control) {
-		lcd.printHora(0, 0, wifi.getHora(), wifi.getMinutos(),
-			wifi.getSegundos());
-		lcd.printFecha(6, 0, wifi.getDia(), wifi.getDiaS(), wifi.getMes(),
-			wifi.getAnio());
-	}
-	if (intept.temporalizadorBool(30000,&ret2) || control) {
-		lcd.printClima(0, 1, wifi.getCelsius(), 0, temperaturaC);
-		lcd.printClima(-1, 1, wifi.getHumedad(), 0, temperaturaH);
-		lcd.printClima(-1, 1, wifi.getHIC(), 0, temperaturaHIC);
-	}
- 	lcd.printBT(19, 0, wifi.getBtEn());
+	lcd.reset();
+	lcd.printHora(0, 0, wifi.getHora(), wifi.getMinutos(),
+		wifi.getSegundos());
+	lcd.printFecha(6, 0, wifi.getDia(), wifi.getDiaS(), wifi.getMes(),
+		wifi.getAnio());
+	lcd.printClima(0, 1, wifi.getCelsius(), 0, temperaturaC);
+	lcd.printClima(-1, 1, wifi.getHumedad(), 0, temperaturaH);
+	lcd.printClima(-1, 1, wifi.getHIC(), 0, temperaturaHIC);
+	lcd.printBT(19, 0, wifi.getBtEn());
 	lcd.printSimbolo(19, 3, wifi.getDoor());
- 	lcd.printWiFi(19, 1, wifi.getWifi());
-	if(control)control = false;
+	lcd.printWiFi(19, 1, wifi.getWifi());
 }
