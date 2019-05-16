@@ -236,12 +236,21 @@ bool wifiInternet::getEncrypt() {
 	else return true;
 }
 bool wifiInternet::status() {
-	if (WiFi.status() != WL_CONNECTED) {
-		return 0;
+	volatile bool estado_wifi = WiFi.status() != WL_CONNECTED;
+	if (estado_wifi) {
+		Wire.beginTransmission(4);
+		Wire.write(RECEIVE_BT_ENABLE);
+		Wire.write(true);
+		Wire.endTransmission();
+
+		Wire.beginTransmission(4);
+		Wire.write(WiFi_REQUEST);
+		Wire.write(true);
+		Wire.endTransmission();
 	}
-	else {
-		return 1;
-	}
+	Blynk.virtualWrite(V4, !estado_wifi);
+	return !estado_wifi;
+
 }
 void wifi_status(void) {
 	Wire.beginTransmission(4);
@@ -255,7 +264,7 @@ void wifi_status(void) {
 BlynkW::BlynkW(char _auth[]) {
 	strcpy(auth, _auth);
 }
-void BlynkW::init(){
+void BlynkW::init() {
 	if (wifi.status())Blynk.begin(auth, "Mi WiFi", "wifipass");
 }
 void BlynkW::run() {
@@ -270,26 +279,26 @@ void BlynkW::lcdSist() {
 	case 1:
 		lcd_sist.clear();
 		lcd_sist.print(0, 0, wifi.getSSID());
-		lcd_sist.print(wifi.getSSID().length() +2, 0, 
+		lcd_sist.print(wifi.getSSID().length() + 2, 0,
 			(wifi.getEncrypt()) ? "Segu" : "Inse");
 		lcd_sist.print(0, 1, "Potencia: ");
-		lcd_sist.print(11, 1,wifi.getRSSI());
-		
+		lcd_sist.print(11, 1, wifi.getRSSI());
+
 		break;
 	case 2:
 		lcd_sist.clear();
-		
+
 		break;
 	default:
 		Serial.println("Error");
 	}
 }
-BLYNK_WRITE(V27){
+BLYNK_WRITE(V27) {
 	menuSist = param.asInt();
-	
+
 }
 //BLUETOOTH
-BLYNK_WRITE(V4){
+BLYNK_WRITE(V4) {
 	Wire.beginTransmission(4);
 	Wire.write(RECEIVE_BT_ENABLE);
 	Wire.write(param.asInt());
@@ -415,7 +424,7 @@ BLYNK_WRITE(V25) {
 BLYNK_WRITE(V19) {
 	Wire.beginTransmission(4);
 	Wire.write(RECEIVE_TIRA_RGB);
-	for (int i = 0; i < 3; i++ )Wire.write(param[i].asInt());
+	for (int i = 0; i < 3; i++)Wire.write(param[i].asInt());
 	Wire.endTransmission();
 }
 //PUERTA

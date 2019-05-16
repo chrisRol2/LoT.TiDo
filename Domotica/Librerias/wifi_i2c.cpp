@@ -18,7 +18,7 @@ int	dia = 0, diaS = 0, mes = 0, anio = 2019;
 int gradosC = 0, hic = 0, humedadP = 0, viento = 0, luz_ext = 0,
 	lluvia = 0, lux = 0, barometro = 0;
 bool BtEnable = 1, door = 1;
-bool WiFiEnable = 0 , BTEnable = 1;
+bool WiFiEnable = 0 , BTEnable = 1, WiFiRequest = 0;
 
 
 int wifiN::getHora(void) {
@@ -165,6 +165,9 @@ void receiveEvent(int howMany) {
 		 aa = Wire1.read();
 		 ab = Wire1.read();
 		 ac = Wire1.read();
+		break;
+	case WiFi_REQUEST:
+		WiFiRequest = Wire1.read();
 		break;
 	default:
 		Serial.println("error");

@@ -40,6 +40,9 @@
 #define	RECEIVE_CLIMA_SELECTOR	'5'
 #define	RECEIVE_CORTINA			'6'
 #define	RECEIVE_VENTANA			'7'
+#define WiFi_REQUEST			'8'
+#define TRUE true	
+#define FALSE false
 
 
 
