@@ -38,27 +38,17 @@ void estado::config(void) {
 
 void function_test() {
 	Serial.print("Lectura: ");
-	analogReadResolution(10);
-	float a = 0;
-	int it = 1000;
-	delay(2);
-	// 	for (int i = 0; i < it; i++) {
-	float b = analogRead(((pin_MQ2_ANALOGICO)));//* 3.3) /4096.0) / 100.0;
-
-// 		a += b;
-	Serial.println(b);
-	// 		delayMicroseconds(500);
-	// 	}
-	a /= it;
-	// 	Serial.println(a);
-	// 	Serial.print("ref: ");
-	// 	Serial.println(analogRead(pin_REF_ANALOGICA));
+	analogReadResolution(12);
+	long bate = 0;
+	bate = analogRead(pin_NIVEL_BATERIA);
+	Serial.print("bateria: ");
+	Serial.println(bate);
 }
 
 void estado::permanente(void) {
 	static unsigned long ret = 0, _test = 0;
 	intept.temporalizador(1000, &ret, home);
-	//intept.temporalizador(500, &_test, function_test);
+	intept.temporalizador(500, &_test, function_test);
 
 	return;
 }
@@ -86,5 +76,6 @@ void estado::home(void) {
 	lcd.printClima(-1, 1, wifi.getHIC(), 0, temperaturaHIC);
 	lcd.printBT(19, 0, wifi.getBtEn());
 	lcd.printSimbolo(19, 3, wifi.getDoor());
+	lcd.printSimbolo(19, 2, 8);
 	lcd.printWiFi(19, 1, wifi.getWifi());
 }
