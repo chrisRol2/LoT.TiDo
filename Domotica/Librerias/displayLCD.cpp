@@ -97,6 +97,73 @@ byte reloj_icon[8] = {
 	B00000,
 };
 
+byte bateria0_icon[8] = {
+	B01110,
+	B11111,
+	B10001,
+	B10001,
+	B10001,
+	B10001,
+	B10001,
+	B11111,
+};
+
+byte bateria1_icon[8] = {
+	B01110,
+	B11111,
+	B10001,
+	B10001,
+	B10001,
+	B10001,
+	B11111,
+	B11111,
+};
+
+byte bateria2_icon[8] = {
+	B01110,
+	B11111,
+	B10001,
+	B10001,
+	B10001,
+	B11111,
+	B11111,
+	B11111,
+};
+
+byte bateria3_icon[8] = {
+	B01110,
+	B11111,
+	B10001,
+	B10001,
+	B11111,
+	B11111,
+	B11111,
+	B11111,
+};
+
+byte bateria4_icon[8] = {
+	B01110,
+	B11111,
+	B10001,
+	B11111,
+	B11111,
+	B11111,
+	B11111,
+	B11111,
+};
+byte bateria5_icon[8] = {
+	B01110,
+	B11111,
+	B11111,
+	B11111,
+	B11111,
+	B11111,
+	B11111,
+	B11111,
+};
+
+
+
 display::display(uint8_t _adr, String _version, 
 	int _fila, int _columnas) : LiquidCrystal_PCF8574(_adr) {
 
@@ -114,6 +181,12 @@ void display::customCharALL() {
 	createChar(5, bt_icon);
 	createChar(6, estufa_icon);
 	createChar(7, reloj_icon);
+	createChar(8, bateria0_icon);
+	createChar(9, bateria1_icon);
+	/*createChar(10, bateria2_icon);
+	createChar(11, bateria3_icon);
+	createChar(12, bateria4_icon);
+	createChar(13, bateria5_icon);*/
 }
 
 bool display::init() {
