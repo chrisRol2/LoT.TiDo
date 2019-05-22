@@ -18,24 +18,8 @@ const String dias[] = { "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" };
 const String meses[] = { "Ene","Feb","Mar","Abr","May","Jun","Jul",
 						 "Ago","Sep","Oct","Nov", "Dic" };
 
-byte grados_c[8] = {
-	B01000,
-	B10100,
-	B01000,
-	B00011,
-	B00100,
-	B00100,
-	B00011,
-};
-byte closed[8] = {
-	B00000,
-	B01110,
-	B10001,
-	B10001,
-	B11111,
-	B11011,
-	B11111,
-};
+byte grados_c[8] = {0x8,0x14,0x8,0x3,0x4,0x4,0x3};
+byte closed[8] = {0x0,0xE,0x11,0x11,0x1F,0x1B,0x1F};
 byte opened[8] = {
 	B00110,
 	B01001,
@@ -103,8 +87,8 @@ byte bateria0_icon[8] = {
 	B10001,
 	B10001,
 	B10001,
-	B10001,
-	B10001,
+	B10111,
+	B11111,
 	B11111,
 };
 
@@ -182,7 +166,7 @@ void display::customCharALL() {
 	createChar(6, estufa_icon);
 	createChar(7, reloj_icon);
 	createChar(8, bateria0_icon);
-	createChar(9, bateria1_icon);
+	//createChar(9, bateria1_icon);
 	/*createChar(10, bateria2_icon);
 	createChar(11, bateria3_icon);
 	createChar(12, bateria4_icon);
@@ -345,5 +329,11 @@ void display::printBT(int x, int y, bool BT_ESTADO) {
 void display::printWiFi(int x, int y, bool WIFI_ESTADO) {
 	gotoxy(x, y);
 	if (WIFI_ESTADO)write(3);
+	else print(" ");
+}
+
+void  display::printBatery(int x, int y, bool BATERY_EMERGENCIA) {
+	gotoxy(x, y);
+	if (BATERY_EMERGENCIA)write(8);
 	else print(" ");
 }

@@ -48,7 +48,7 @@ void function_test() {
 void estado::permanente(void) {
 	static unsigned long ret = 0, _test = 0;
 	intept.temporalizador(1000, &ret, home);
-	intept.temporalizador(500, &_test, function_test);
+	//intept.temporalizador(500, &_test, function_test);
 
 	return;
 }
@@ -76,6 +76,7 @@ void estado::home(void) {
 	lcd.printClima(-1, 1, wifi.getHIC(), 0, temperaturaHIC);
 	lcd.printBT(19, 0, wifi.getBtEn());
 	lcd.printSimbolo(19, 3, wifi.getDoor());
-	lcd.printSimbolo(19, 2, 8);
+	lcd.printBatery(19, 2, true);
 	lcd.printWiFi(19, 1, wifi.getWifi());
+	
 }

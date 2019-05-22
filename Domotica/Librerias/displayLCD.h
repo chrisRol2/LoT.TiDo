@@ -39,6 +39,7 @@ class display : public LiquidCrystal_PCF8574{
 		void printClima(int x, int y, int valor, int valorF, int tipoClima);
 		void printBT(int x, int y, bool BT_ESTADO);
 		void printWiFi(int x, int y, bool WIFI_ESTADO);
+		void printBatery(int x, int y, bool BATERY_EMERGENCIA);
 	
 };
 
