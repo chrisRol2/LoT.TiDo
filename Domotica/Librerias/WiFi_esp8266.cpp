@@ -16,6 +16,9 @@ const char* password = "23554243";
 char key_Blynk[] = "8e5c3a46ecc84586bd41462456fd5f42";
 
 int EsclavoDueP = 4;
+
+
+
 wifiInternet wifi("RSC-2.4GHz", "23554243");
 //------------------------ DHT SENSOR READ --------------------------------
 DHTesp dht;
@@ -247,8 +250,9 @@ bool wifiInternet::status() {
 		Wire.write(WiFi_REQUEST);
 		Wire.write(true);
 		Wire.endTransmission();
+		Serial.print("WiFi status: "); Serial.println(estado_wifi);
+		
 	}
-	Blynk.virtualWrite(V4, !estado_wifi);
 	return !estado_wifi;
 
 }
@@ -293,10 +297,18 @@ void BlynkW::lcdSist() {
 		Serial.println("Error");
 	}
 }
+
+void BlynkW::reconectar() {
+
+	Blynk.connect();
+}
+
 BLYNK_WRITE(V27) {
 	menuSist = param.asInt();
 
 }
+
+
 //BLUETOOTH
 BLYNK_WRITE(V4) {
 	Wire.beginTransmission(4);

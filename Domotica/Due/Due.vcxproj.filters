@@ -36,9 +36,6 @@
     <ClInclude Include="..\Librerias\interrupciones.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Librerias\offlineBlynkBT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Librerias\pinesIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -49,9 +46,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Librerias\wifi_i2c.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Librerias\blynk_bt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Librerias\luces.h">
@@ -71,16 +65,10 @@
     <ClCompile Include="..\Librerias\interrupciones.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Librerias\offlineBlynkBT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Librerias\reloj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Librerias\wifi_i2c.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Librerias\blynk_bt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Librerias\luces.cpp">

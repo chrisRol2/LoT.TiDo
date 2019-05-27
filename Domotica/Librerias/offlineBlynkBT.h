@@ -11,4 +11,6 @@
 
 
 #endif
-
+#include <BlynkSimpleSerialBLE.h>
+char auth[] = "7a312d29e2d24f6b80f71b8a1a16cce4";
+void test();
