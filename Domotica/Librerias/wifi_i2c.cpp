@@ -13,8 +13,8 @@
 void receiveEvent(int howMany);
 void requestEvent();
 
-int hora = 10, minutos = 0, segundos = 0;
-int	dia = 0, diaS = 0, mes = 0, anio = 2019;
+int hora = 0, minutos = 0, segundos = 0;
+int	dia = 1, diaS = 1, mes = 1, anio = 2019;
 int gradosC = 0, hic = 0, humedadP = 0, viento = 0, luz_ext = 0,
 	lluvia = 0, lux = 0, barometro = 0;
 bool BtEnable = 1, door = 1;
@@ -66,6 +66,7 @@ void wifiN::reset(void){
 	digitalWrite(pin_RESET_WIFI, 0);
 	delay(10);
 	digitalWrite(pin_RESET_WIFI, 1);
+	pinMode(pin_RESET_WIFI, INPUT);
 }
 void wifiN::config(void) {
 	Wire1.begin(i2c_dir); 
@@ -120,6 +121,7 @@ void receiveEvent(int howMany) {
 		break;
 	case RECEIVE_BT_ENABLE:
 		BtEnable = Wire1.read();
+		Serial.print("bt: "); Serial.println(BtEnable);
 		break;
 	case RECEIVE_LLUVIA:
 		lluvia = Wire1.read();
