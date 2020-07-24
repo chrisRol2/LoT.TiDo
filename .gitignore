@@ -44,3 +44,4 @@ board.buildinfo
 *.db
 *.xml
 *.*.xml
+/Domotica/.vs/Domotica/v16/Browse.VC.opendb
