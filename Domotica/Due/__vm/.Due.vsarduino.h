@@ -13,9 +13,8 @@
 
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
-#define printf iprintf
 #define F_CPU 84000000L
-#define ARDUINO 10809
+#define ARDUINO 108012
 #define ARDUINO_SAM_DUE
 #define ARDUINO_ARCH_SAM
 #define __SAM3X8E__
@@ -23,6 +22,7 @@
 #define USB_PID 0x003e
 #define USBCON
 #define __cplusplus 201103L
+#define _Pragma(x)
 #define __ARM__
 #define __arm__
 #define __inline__

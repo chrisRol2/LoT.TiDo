@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Domotica",
+    "\\Domotica\\Due",
     "\\Domotica\\Librerias",
     "\\Domotica\\NodeMCU"
   ],
-  "SelectedNode": "\\Domotica\\NodeMCU\\NodeMCU.ino",
+  "SelectedNode": "\\Domotica\\Librerias\\estados_esp8266.cpp",
   "PreviewInSolutionExplorer": false
 }

@@ -1,23 +1,22 @@
 /*
+/*
  Name:		NodeMCU.ino
- Created:	15/04/2019 13:20:45
- Author:	chris
+ Created:	13/07/2020 1:11:57
+ Author:	Christopher Roldan Sanchez
+ Email:     Christopher_rol@hotmail.es
+ Descripcion:
+
 */
 
-#include "estados_esp8266.h"
-#include "WiFi_esp8266.h"
-config IO(4);
-estados DOIT;
+*/
 
 
 
 void setup() {
-	IO.init();
-	DOIT.config();
-	
+
 }
 
 
 void loop() {
-	DOIT.permanente();
+	
 }
