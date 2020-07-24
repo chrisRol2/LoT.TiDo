@@ -10,7 +10,7 @@
 #include "Reloj_NTP.h"
 DHT_Tiempo climaInte(DHTPIN, DHT_11);
 reloj_calendarioW reloj(-3);
-BlynkW APP("8e5c3a46ecc84586bd41462456fd5f42");
+BlynkW APP("");
 
 void clima_send(void){
 	climaInte.send();

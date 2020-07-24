@@ -11,15 +11,15 @@
 #include "Constantes_i2c.h"
 #include <string.h>
 
-char ssid[] = "Room";
-char pass[] = "EstaEsUnaPass,SuperSegura@creo,jaja";
-char key_Blynk[] = "8e5c3a46ecc84586bd41462456fd5f42";
+char ssid[] = "";
+char pass[] = "";
+char key_Blynk[] = "";
 
 int EsclavoDueP = 4;
 
 
 
-wifiInternet wifi("Room", "EstaEsUnaPass,SuperSegura@creo,jaja");
+wifiInternet wifi("", "");
 //------------------------ DHT SENSOR READ --------------------------------
 DHTesp dht;
 
