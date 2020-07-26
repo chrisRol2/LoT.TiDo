@@ -12,3 +12,7 @@
 
 #endif
 
+
+char api_connect(char token[]);
+void api_Run();
+bool isTokenValid();
