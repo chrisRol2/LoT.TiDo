@@ -1,3 +1,4 @@
+#include "LoT.TiDo_OTA.h"
 #include "Lot.TiDo_CONNECTWiFi.h"
 #include "Lot.TiDo_Blynk_4lightR.h"
 #include <ESP8266WiFi.h>
@@ -20,6 +21,9 @@ void setup() {
     setupSpiffs();
     WiFiManager_setup();
     get_key(blynk_Key);
+
+    OTA_SETUP(device, password_d);
+
     if (!api_connect(blynk_Key)) {
         Serial.println("No conecto blynk");
         if (!isTokenValid()) {
@@ -44,10 +48,8 @@ void setup() {
 }
 
 void loop() {
-    Serial.println("Entra en el Loop");
-   // init_interrupciones();
-    while (true)
-    {
+
         api_Run();
-    }
+        OTA_RUN();
+    
 }
