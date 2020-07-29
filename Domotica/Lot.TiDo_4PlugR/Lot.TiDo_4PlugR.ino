@@ -1,14 +1,7 @@
 #include "Lot.TiDo_CONNECTWiFi.h"
 #include "Lot.TiDo_Blynk_4lightR.h"
 #include <ESP8266WiFi.h>
-
-#define light_0         0
-#define light_1         1
-#define light_switch_0  2
-#define light_switch_1  3
-#define device          "2LightR"
-#define sistem          "Lot.TiDo"
-#define password        "12345678"
+#include "Defaults_2LightR.h"
 
 char blynk_Key[34] = "";
 
@@ -20,7 +13,7 @@ void setup() {
     Serial.begin(74880); Serial.println();
     Serial.print(sistem);
     Serial.print(" Debug: "); Serial.println(device);
-    wifi_data(device, sistem, password);
+    wifi_data(device, sistem, password_d);
     setupSpiffs();
     WiFiManager_setup();
     get_key(blynk_Key);
@@ -28,18 +21,20 @@ void setup() {
         Serial.println("No conecto blynk");
         if (!isTokenValid()) {
             clear_Data();
+            WiFiManager_setup();
+            get_key(blynk_Key);
         }
-        else /*
+        else { /*
                 funcion en blynk que  compruebe conexion a wifi
                 si hay wifi controlar si hay conexion a internet, hacer un ping
                 si no hay internet, abrir una web para conectar el wifi de vuelta
                 o cambiar valores, interruptores en la web
-
              */
+        }
     }
-    else { 
+    else 
         Serial.println("Conecto blynk"); 
-    }
+    
 }
 
 void loop() {
