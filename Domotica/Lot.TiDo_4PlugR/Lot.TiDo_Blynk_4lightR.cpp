@@ -48,14 +48,14 @@ void api_Run() {
 BLYNK_WRITE(V1)
 {
 	int pinValue = param.asInt(); // assigning incoming value from pin V1 to a variable
-	Blynk.virtualWrite(V1,light_0_EstadoActual);
+	digitalWrite(light_0,pinValue);
 
 	// process received value
 }
 BLYNK_WRITE(V2)
 {
 	int pinValue = param.asInt(); // assigning incoming value from pin V1 to a variable
-	
+	digitalWrite(light_1, pinValue);
 
 }
 

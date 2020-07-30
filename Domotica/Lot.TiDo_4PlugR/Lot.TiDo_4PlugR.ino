@@ -36,15 +36,11 @@ void setup() {
                 si hay wifi controlar si hay conexion a internet, hacer un ping
                 si no hay internet, abrir una web para conectar el wifi de vuelta
                 o cambiar valores, interruptores en la web
-             */
+               */
         }
     }
     else 
         Serial.println("Conecto blynk"); 
-
-    detachInterrupt(digitalPinToInterrupt(light_switch_0));
-    //attachInterrupt(digitalPinToInterrupt(light_switch_0),test,LOW);
-
 }
 
 void loop() {
