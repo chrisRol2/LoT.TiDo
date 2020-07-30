@@ -61,11 +61,14 @@ BLYNK_WRITE(V2)
 
 BLYNK_WRITE(V3)
 {
-
+	String input_terminal = param.asStr();
 	// if you type "Marco" into Terminal Widget - it will respond: "Polo:"
-	if (String("Marco") == param.asStr()) {
+	if (String("Marco") == input_terminal) {
 		terminal.println("You said: 'Marco'");
 		terminal.println("I said: 'Polo'");
+	}
+	else if (String("cls") == input_terminal) {
+		terminal.clear();
 	}
 	else {
 
