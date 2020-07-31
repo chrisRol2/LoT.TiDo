@@ -21,5 +21,28 @@
     <ClInclude Include="__vm\.Lot.TiDo_4PlugR.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lot.TiDo_CONNECTWiFi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lot.TiDo_Blynk_4lightR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Defaults_2LightR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoT.TiDo_OTA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lot.TiDo_CONNECTWiFi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lot.TiDo_Blynk_4lightR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoT.TiDo_OTA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
