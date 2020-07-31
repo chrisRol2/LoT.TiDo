@@ -22,7 +22,7 @@ void OTA_SETUP(char Host_name[], char Host_pw[]) {
     ArduinoOTA.setHostname(Host_name);
 
     // No authentication by default
-    ArduinoOTA.setPassword(Host_pw);
+    //ArduinoOTA.setPassword(Host_pw);
 
     // Password can be set with it's md5 value as well
     // MD5(admin) = 21232f297a57a5a743894a0e4a801fc3
