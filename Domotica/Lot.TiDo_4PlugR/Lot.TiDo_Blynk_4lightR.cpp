@@ -14,8 +14,8 @@ void interrupcion_1();
 bool light_0_EstadoActual = 0;
 bool light_0_EstadoAnterior = 0;
 
-bool light_1_EstadoActual = 0;
-bool light_1_EstadoAnterior = 0;
+  bool light_1_EstadoActual = 0;
+  bool light_1_EstadoAnterior = 0;
 
 bool estado_0 = true;
 bool estado_1 = true;
@@ -27,14 +27,15 @@ WidgetTerminal terminal(V3);
 void init_interrupciones(){
 	//attachInterrupt(digitalPinToInterrupt(light_switch_0), interrupcion_0, FALLING);
 	//attachInterrupt(digitalPinToInterrupt(light_switch_1), interrupcion_1, FALLING);
-	attachInterrupt(digitalPinToInterrupt(4), interrupcion_0, HIGH);
-	attachInterrupt(digitalPinToInterrupt(5), interrupcion_1, HIGH);
-	
+	interrupcion_0();
+	delay(10);
+	interrupcion_1();
+	delay(10);
 }
 
 char api_connect(char token[]) {
 	Blynk.begin(token, NULL, NULL);
-	Serial.println("Blynk inicio");
+	//Serial.println("Blynk inicio");
 	return Blynk.connected();
 }
 
@@ -55,30 +56,30 @@ BLYNK_WRITE(V1)
 {
 	int pinValue = param.asInt(); // assigning incoming value from pin V1 to a variable
 	if (pinValue == 1) {
-		estado_0 = false;
+		estado_0 = true;
 	}
 	else {
-		estado_0 = true;
+		estado_0 = false;
 	}	
-	digitalWrite(light_0, estado_0);
-	terminal.print("Luz 0: "); terminal.println(estado_0);
+	digitalWrite(light_0, !estado_0);
+	terminal.print("Luz 0: "); terminal.println(!estado_0);
 	terminal.flush();
-	Serial.print("Luz 0: "); Serial.println(estado_0);
+	//Serial.print("Luz 0: "); Serial.println(!estado_0);
 }
 BLYNK_WRITE(V2)
 {
 
 	int pinValue = param.asInt(); // assigning incoming value from pin V1 to a variable
 	if (pinValue == 1) {
-		estado_1 = false;
-	}
-	else {
 		estado_1 = true;
 	}
-	digitalWrite(light_1, estado_1);
-	terminal.print("Luz 1: "); terminal.println(estado_1);
+	else {
+		estado_1 = false;
+	}
+	digitalWrite(light_1, !estado_1);
+	terminal.print("Luz 1: "); terminal.println(!estado_1);
 	terminal.flush();
-	Serial.print("Luz 1: "); Serial.println(estado_1);
+	
 }
 
 BLYNK_WRITE(V3)
@@ -110,8 +111,34 @@ BLYNK_WRITE(V3)
 
 void interrupcion_0() {
 	//terminal.print("Interrupcion 0");
+	light_0_EstadoActual = digitalRead(light_switch_0);
+	//light_1_EstadoActual = digitalRead(light_switch_1);
+
+	// compare the light_0_EstadoActual to its previous state
+	if ((light_0_EstadoActual != light_0_EstadoAnterior)) {
+		if (light_0_EstadoActual == HIGH) {
+			estado_0 = !estado_0;
+			digitalWrite(light_0, !estado_0);
+			Blynk.virtualWrite(V1, estado_0);
+		}
+	}
+	// save the current state as the last state, for next time through the loop
+	light_0_EstadoAnterior = light_0_EstadoActual;
 
 }
 void interrupcion_1() {
 	//terminal.print("Interrupcion 1");
+	light_1_EstadoActual = digitalRead(light_switch_1);
+	//light_1_EstadoActual = digitalRead(light_switch_1);
+
+	// compare the light_0_EstadoActual to its previous state
+	if ((light_1_EstadoActual != light_1_EstadoAnterior)) {
+		if (light_1_EstadoActual == HIGH) {
+			estado_1 = !estado_1;
+			digitalWrite(light_1, !estado_1);
+			Blynk.virtualWrite(V2, estado_1);
+		}
+	}
+	// save the current state as the last state, for next time through the loop
+	light_1_EstadoAnterior = light_1_EstadoActual;
 }
