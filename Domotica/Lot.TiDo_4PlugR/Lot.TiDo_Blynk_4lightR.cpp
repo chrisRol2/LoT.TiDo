@@ -33,7 +33,7 @@ void init_interrupciones(){
 
 char api_connect(char token[]) {
 	Blynk.begin(token, NULL, NULL);
-	//Blynk.syncVirtual(V1,V2);
+	Blynk.syncVirtual(V1,V2);
 	return Blynk.connected();
 }
 
@@ -103,7 +103,8 @@ BLYNK_WRITE(V3)
 //----------------------- BLYNK VIRTUAL PIN  ------------------------------
 //-------------------------------------------------------------------------
 //------------------------- INTERRUPCIONES --------------------------------
-long off_all = 0;
+int off_all = 0;
+int double_clic = 0, double_cont;
 void interrupcion_0() {
 	//terminal.print("Interrupcion 0");
 	light_0_EstadoActual = digitalRead(light_switch_0);
@@ -144,7 +145,7 @@ void interrupcion_0() {
 	light_0_EstadoAnterior = light_0_EstadoActual;
 
 }
-int double_clic = 0;
+
 void interrupcion_1() {
 	//terminal.print("Interrupcion 1");
 	
@@ -161,9 +162,21 @@ void interrupcion_1() {
 		}
 	}
 	if (double_clic == 2){
+		double_clic = 0;
+		
+		estado_0 = true;
+		digitalWrite(light_0, !estado_0);
+		Blynk.virtualWrite(V1, estado_0);
+
+		estado_1 = true;
+		digitalWrite(light_1, !estado_1);
+		Blynk.virtualWrite(V2, estado_1);
+
+
 		terminal.print("double: ");
-		terminal.println(double_clic);
+		terminal.println(double_cont);
 		terminal.flush();
+		double_cont = 0;
 	}
 	if (light_1_EstadoActual == HIGH) {
 		off_all++;
@@ -183,7 +196,16 @@ void interrupcion_1() {
 		terminal.println(off_all);
 		terminal.flush();
 		off_all = 0;
+		double_cont = double_clic = 0;
 
+	}
+	else {
+		double_cont++;
+		delay(1);
+		if (double_cont >= 20) {
+			double_cont = double_clic = 0;
+			
+		}
 	}
 	// save the current state as the last state, for next time through the loop
 	light_1_EstadoAnterior = light_1_EstadoActual;
