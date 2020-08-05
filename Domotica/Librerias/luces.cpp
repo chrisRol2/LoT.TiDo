@@ -1,6 +1,11 @@
-// 
-// 
-// 
+/*
+*	File:	luces.cpp
+*	Author : Christopher Roldan Sanchez
+*	Mail : Christopher_Rol@hotmail.es
+*	Date:
+*	Description :
+*
+*/
 
 #include "luces.h"
 
@@ -54,5 +59,11 @@ void lampara::setAutoOFF(bool _auto_OFF, unsigned long _retraso_off){
 void lampara::refresh(){
 		if (status)on();
 		else off();
+}
+
+
+
+LUZ_blynk::LUZ_blynk()
+{
 }
 

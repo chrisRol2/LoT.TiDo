@@ -1,4 +1,11 @@
-// luces.h
+/*
+*	File:	luces.h
+*	Author : Christopher Roldan Sanchez
+*	Mail : Christopher_Rol@hotmail.es
+*	Date:
+*	Description :
+*
+*/
 
 #ifndef _LUCES_h
 #define _LUCES_h
@@ -11,6 +18,10 @@
 
 
 #endif
+
+#define TACTIL	 0
+#define PULL_UP	 1
+#define HIGH_IMP 0
 
 class lampara {
 private:
@@ -27,8 +38,10 @@ private:
 	unsigned long retraso_off = 60000;
 	void refresh();
 public:
+
 	lampara(bool _isRGB, bool _isAnalog, unsigned int _pin) : isRGB(_isRGB),
 		isAnalog(_isAnalog), pin(_pin) {}
+
 	lampara(bool _isRGB, unsigned int _pin_R, unsigned int _pin_G,
 		unsigned int _pin_B) : isRGB(_isRGB), pinR(_pin_R), 
 		pinG(_pin_G), pinB(_pin_B) {}
@@ -41,11 +54,24 @@ public:
 	void setAutoOFF(bool _auto_OFF, unsigned long _retraso_off);
 
 };
-class pir{
+
+class LUZ_blynk{
 private:
+	char pin_hardware;
+	char pin_Blynk;
+	char estado;
+	char pin_button;
+
+	bool readButton();
+
 public:
-};
-class irRemote{
-private:
-public:
+	LUZ_blynk(char _pin_hardware, char _pin_Blynk, char _pin_button) : pin_hardware(_pin_hardware),
+		pin_Blynk(_pin_Blynk), pin_button(_pin_button) {}
+	void init(bool estado_inicio, int tipo_boton);
+	bool refresh();
+	void on();
+	void off();
+	void toggle();
+	void run();
+
 };
