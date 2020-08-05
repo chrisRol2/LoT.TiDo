@@ -33,6 +33,9 @@
     <ClInclude Include="LoT.TiDo_OTA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Librerias\luces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lot.TiDo_CONNECTWiFi.cpp">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LoT.TiDo_OTA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Librerias\luces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -112,6 +112,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Librerias\luces.h" />
     <ClInclude Include="Defaults_2LightR.h" />
     <ClInclude Include="Lot.TiDo_Blynk_4lightR.h" />
     <ClInclude Include="Lot.TiDo_CONNECTWiFi.h" />
@@ -119,6 +120,7 @@
     <ClInclude Include="__vm\.Lot.TiDo_4PlugR.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Librerias\luces.cpp" />
     <ClCompile Include="Lot.TiDo_Blynk_4lightR.cpp" />
     <ClCompile Include="Lot.TiDo_CONNECTWiFi.cpp" />
     <ClCompile Include="LoT.TiDo_OTA.cpp" />
