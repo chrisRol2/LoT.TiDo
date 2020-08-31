@@ -17,19 +17,20 @@ void setup() {
    // Serial.begin(74880); Serial.println();
    // Serial.print(sistem);
    // Serial.print(" Debug: "); Serial.println(device);
-    wifi_data(device, sistem, password_d);
+  //  wifi_data(device_, sistem, password_d);
+   // wifi_data("2LightR", "Lot.TiDo", "12345678");
     setupSpiffs();
     WiFiManager_setup();
     get_key(blynk_Key);
 
-    OTA_SETUP(device, password_d);
+    OTA_SETUP(device_, password_d);
 
     if (!api_connect(blynk_Key)) {
       //  Serial.println("No conecto blynk");
         if (!isTokenValid()) {
-            clear_Data();
-            WiFiManager_setup();
-            get_key(blynk_Key);
+           // clear_Data();
+           // WiFiManager_setup();
+            //get_key(blynk_Key);
         }
         else { /*
                 funcion en blynk que  compruebe conexion a wifi
@@ -39,12 +40,13 @@ void setup() {
                */
         }
     }
+    
     //else 
       //  Serial.println("Conecto blynk"); 
 }
 
 void loop() {
-    init_interrupciones();
-    api_Run();
-    OTA_RUN();    
+   init_interrupciones();
+   api_Run();
+   OTA_RUN();    
 }

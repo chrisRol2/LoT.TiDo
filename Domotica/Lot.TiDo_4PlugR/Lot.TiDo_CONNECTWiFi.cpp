@@ -89,6 +89,7 @@ void WiFiManager_setup() {
     wm.addParameter(&custom_api_token);
 
     if (!wm.autoConnect(name_default, password_default)) {
+   // if (!wm.autoConnect("Hola", "12345678")) {
         Serial.println("failed to connect and hit timeout");
         delay(3000);
         // if we still have not connected restart and try all over again

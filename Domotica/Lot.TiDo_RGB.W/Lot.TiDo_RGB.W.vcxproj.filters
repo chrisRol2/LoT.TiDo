@@ -17,4 +17,41 @@
   <ItemGroup>
     <None Include="Lot.TiDo_RGB.W.ino" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="__vm\.Lot.TiDo_RGB.W.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Librerias\RGB_TIRAS\LoT.Tido_RGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lot.TiDo_4PlugR\Lot.TiDo_CONNECTWiFi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lot.TiDo_4PlugR\LoT.TiDo_OTA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Default_RGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lot.TiDo_Blynk_RGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Librerias\RGB_TIRAS\rgb_colors_Hue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Librerias\RGB_TIRAS\LoT.Tido_RGB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lot.TiDo_4PlugR\Lot.TiDo_CONNECTWiFi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lot.TiDo_4PlugR\LoT.TiDo_OTA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lot.TiDo_Blynk_RGB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
