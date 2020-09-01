@@ -99,13 +99,10 @@ void RBG_STRIP::refresh() {
 					firstloop = false;
 					modes_cont = 0;
 				}
-				fade();
-
+				
 				if( micros() > delayModespeed ) {
 					delayModespeed = micros() + (speed * 1000) / 5;
-					modes_cont += 0.005;
-					brightness = (int) (512 * sin(modes_cont) + 512);
-					
+					fade();
 				}
 				break;
 			case 3: // flash
@@ -170,29 +167,51 @@ void RBG_STRIP::random_color() {
 }
 
 void RBG_STRIP::fade() {
-	/*static int redFade;
-	static int greenFade;
-	static int blueFade;
-	volatile int t = speed;
-	for( int i = 0; i <= 1023; i++ ) {
-		analogWrite(red_pin, i); // fade up 
-		analogWrite(green_pin, 1023 - i); // fade down
-		analogWrite(blue_pin, 0); // do nothing
-		delay(t);
+	static int bits = 10;
+	static int valueMAX = pow(2, bits) - 1;
+
+	static int fade_case = 0;
+
+	static int redFade = valueMAX;
+	static int greenFade = 0;
+	static int blueFade = 0;
+
+	if( greenFade == 0 && blueFade == 0 ) fade_case = 2;
+	else if( redFade == valueMAX && greenFade == valueMAX ) fade_case = 3;
+	else if( redFade == 0 && blueFade == 0 ) fade_case = 4;
+	else if( greenFade == valueMAX && blueFade == valueMAX )  fade_case = 5;
+	else if( redFade == 0 && greenFade == 0 )  fade_case = 6;
+	else if( redFade == valueMAX && blueFade == valueMAX ) fade_case = 1;
+
+	switch( fade_case ) {
+		
+		case 1:
+			blueFade--;
+			break;
+		case 2: 
+			greenFade++;
+			break;
+		case 3: 
+			redFade--;
+			break;
+		case 4: 
+			blueFade++;
+			break;
+		case 5: 
+			greenFade--;
+			break;
+		case 6: 
+			redFade++;
+			break;
+		default:
+			redFade = valueMAX;
+			greenFade = 0;
+			blueFade = valueMAX;
+			fade_case = 6;
+			break;
 	}
-	for( int i = 0; i <= 1023; i++ ) {
-		analogWrite(red_pin, 1023 - i); // fade down
-		analogWrite(green_pin, 0); // do nothing
-		analogWrite(blue_pin, i); // fade up 
-		delay(t);
-	}
-	for( int i = 0; i <= 1023; i++ ) {
-		analogWrite(red_pin, 0); // do nothing
-		analogWrite(green_pin, i); // fade up
-		analogWrite(blue_pin, 1023 - i); // fade down 
-		delay(t);
-	}*/
 
 
-	//set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 10);
+
+	set(redFade, greenFade, blueFade, bits);
 }
