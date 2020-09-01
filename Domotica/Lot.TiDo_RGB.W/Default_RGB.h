@@ -1,9 +1,9 @@
-#define RED_PIN   16
-#define GREEN_PIN 5
-#define BLUE_PIN  4
+#define RED_PIN   0
+#define GREEN_PIN 1
+#define BLUE_PIN  2
 
 #define device_          "2RGBw"
 #define sistem          "Lot.TiDo"
 #define password_d       "12345678"
 
-
+#define REFRESH_TIME 1

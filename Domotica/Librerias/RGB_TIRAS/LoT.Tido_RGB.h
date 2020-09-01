@@ -22,13 +22,17 @@ private:
 	int GREEN_VALUE;
 	int BLUE_VALUE;
 
-	int brightness = 1023;
+	int brightness;
 
 	bool status;
 
 	int mode_rgb;
 
-	void set(int red, int green, int blue);
+	int speed;
+
+	void set(int red, int green, int blue,int depth);
+	void set(int color[3],int depth);
+	void fade();
 
 	//modos
 
@@ -48,5 +52,6 @@ public:
 	void getColor(int rgb[3]);
 	void refresh();
 	void mode(int _mode_rgb);
+	void setSpeed(int _speed);
 };
 

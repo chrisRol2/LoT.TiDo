@@ -4,6 +4,7 @@
  Author:	chris
 */
 
+
 #include "Lot.TiDo_Blynk_RGB.h"
 #include "LoT.TiDo_OTA.h"
 #include "Lot.TiDo_CONNECTWiFi.h"
@@ -16,7 +17,9 @@ char blynk_Key[34] = "";
 void setup() {
     pinMode(RED_PIN, OUTPUT); digitalWrite(RED_PIN, 1);
     pinMode(GREEN_PIN, OUTPUT); digitalWrite(GREEN_PIN, 1);
-    pinMode(BLUE_PIN, OUTPUT); digitalWrite(BLUE_PIN, 2);
+    pinMode(BLUE_PIN, OUTPUT); digitalWrite(BLUE_PIN, 1);
+
+    wifi_data(device_, sistem, password_d);
 
     setupSpiffs();
     WiFiManager_setup();
@@ -44,5 +47,4 @@ void setup() {
 void loop() {
     api_Run();
     OTA_RUN();
-
 }

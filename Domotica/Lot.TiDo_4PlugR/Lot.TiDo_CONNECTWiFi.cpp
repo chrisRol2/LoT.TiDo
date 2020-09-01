@@ -6,6 +6,7 @@
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ArduinoJson.h> // https://github.com/bblanchon/ArduinoJson
 #include <ESP8266WiFi.h>
+#include <strings.h>
 
 
 //define your default values here, if there are different values in config.json, they are overwritten.
@@ -17,9 +18,9 @@ void saveConfigCallback();
 WiFiManager wm;
 
 void wifi_data(char nameAP[], char nameSIS[] , char passwordDEF[]) {
-    strcat(nameSIS, " ");
-    strcpy(name_default, strcat(nameSIS, nameAP));
-    strcpy(password_default, passwordDEF);
+  
+    sprintf(password_default, "%s", passwordDEF);
+    sprintf(name_default, "%s %s", nameSIS, nameAP);
 }
 void get_key(char key_blynk[]) {
     strcpy(key_blynk, api_token);

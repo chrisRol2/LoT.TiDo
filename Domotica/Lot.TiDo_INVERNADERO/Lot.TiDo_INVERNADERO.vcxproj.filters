@@ -17,4 +17,9 @@
   <ItemGroup>
     <None Include="Lot.TiDo_INVERNADERO.ino" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="__vm\.Lot.TiDo_INVERNADERO.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
