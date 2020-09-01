@@ -99,11 +99,12 @@ void RBG_STRIP::refresh() {
 					firstloop = false;
 					modes_cont = 0;
 				}
+				fade();
+
 				if( micros() > delayModespeed ) {
 					delayModespeed = micros() + (speed * 1000) / 5;
 					modes_cont += 0.005;
 					brightness = (int) (512 * sin(modes_cont) + 512);
-					fade();
 					
 				}
 				break;
@@ -169,13 +170,29 @@ void RBG_STRIP::random_color() {
 }
 
 void RBG_STRIP::fade() {
-	static int redFade;
+	/*static int redFade;
 	static int greenFade;
 	static int blueFade;
+	volatile int t = speed;
+	for( int i = 0; i <= 1023; i++ ) {
+		analogWrite(red_pin, i); // fade up 
+		analogWrite(green_pin, 1023 - i); // fade down
+		analogWrite(blue_pin, 0); // do nothing
+		delay(t);
+	}
+	for( int i = 0; i <= 1023; i++ ) {
+		analogWrite(red_pin, 1023 - i); // fade down
+		analogWrite(green_pin, 0); // do nothing
+		analogWrite(blue_pin, i); // fade up 
+		delay(t);
+	}
+	for( int i = 0; i <= 1023; i++ ) {
+		analogWrite(red_pin, 0); // do nothing
+		analogWrite(green_pin, i); // fade up
+		analogWrite(blue_pin, 1023 - i); // fade down 
+		delay(t);
+	}*/
 
 
-
-
-
-	set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 10);
+	//set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 10);
 }
