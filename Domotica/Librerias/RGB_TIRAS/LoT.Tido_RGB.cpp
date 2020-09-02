@@ -135,7 +135,7 @@ void RBG_STRIP::refresh() {
 				if( micros() > delayModespeed ) {
 					delayModespeed = micros() + (speed*1000) / 5;
 					modes_cont+= 0.005;
-					brightness = (int)(512 * sin(modes_cont ) + 512);
+					brightness = (int)(509 * sin(modes_cont ) + 514);
 					set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 10);
 				}
 				break;
