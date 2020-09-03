@@ -14,28 +14,47 @@
 
 RBG_STRIP desktop(RED_PIN, GREEN_PIN, BLUE_PIN);
 
+WidgetTerminal terminal(V3);
+BLYNK_WRITE(V1) {
+	int data = param.asInt();
+	if (data){
+		terminal.println("conecto");
+	}
+	else {
+		terminal.println("no conecto");
+	}
+	terminal.flush();
+}
+void terminal_println(char cosa[]) {
+	terminal.print(cosa);
+	terminal.flush();
+}
+
 char api_connect(char token[]) {
 	Blynk.begin(token, NULL, NULL);
 	Blynk.syncAll();
 	
+	return Blynk.connected();
+}
 
+bool connected() {
 
 	return Blynk.connected();
 }
-bool isTokenValid() {
-	return !Blynk.isTokenInvalid();
 
+bool isTokenValid() {
+
+	return !Blynk.isTokenInvalid();
 }
 
 void api_Run() {
 
 	Blynk.run();
-	desktop.refresh();
-	
 }
 
-void init_interrupciones() {
+void offline_funcions() {
 
+	desktop.refresh();
 }
 
 
@@ -47,13 +66,11 @@ BLYNK_WRITE(V19) {
 BLYNK_WRITE(V29) {
 
 	desktop.change(param.asInt());
-
 }
 
 BLYNK_WRITE(V14) {
 
 	desktop.setBrightness(param.asInt());
-
 }
 
 BLYNK_WRITE(V34) {
