@@ -8,7 +8,6 @@
 #include "Lot.TiDo_Blynk_RGB.h"
 #include "LoT.TiDo_OTA.h"
 #include "Lot.TiDo_CONNECTWiFi.h"
-
 #include "Default_RGB.h"
 
 char blynk_Key[34] = "";
@@ -45,6 +44,19 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-    api_Run();
-    OTA_RUN();
+
+    if( connected() ) {
+        api_Run();
+    }
+    else {
+        static long retardment = 0;
+        if( millis() > retardment ) {
+            api_connect(blynk_Key);
+            retardment = millis() + RECONNECTION_TIME;
+        }
+    }
+    if( connected_wifi() ) {
+        OTA_RUN();
+    }
+    offline_funcions();
 }
