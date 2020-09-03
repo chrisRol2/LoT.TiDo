@@ -13,6 +13,7 @@
 #endif
 
 
+#define RECONNECTION_TIME 3000
 
 //define your default values here, if there are different values in config.json, they are overwritten.
 
@@ -21,3 +22,4 @@ void get_key(char key_blynk[]);
 void setupSpiffs();
 void WiFiManager_setup();
 void clear_Data();
+bool connected_wifi();

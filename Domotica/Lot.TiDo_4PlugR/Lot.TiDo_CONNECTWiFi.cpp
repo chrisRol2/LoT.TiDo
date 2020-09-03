@@ -31,6 +31,10 @@ void clear_Data() {
     WiFiManager_setup();// ESP.restart();
 }
 
+bool connected_wifi() {
+    return (WiFi.status() == WL_CONNECTED);
+}
+
 //callback notifying us of the need to save config
 bool shouldSaveConfig = false;
 void saveConfigCallback() {
