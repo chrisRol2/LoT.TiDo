@@ -24,7 +24,7 @@ bool estado_1 = true;
 WidgetTerminal terminal(V3);
 //-------------------------------------------------------------------------
 //----------------------- BLYNK CONECT ------------------------------------
-void init_interrupciones(){
+void offline_funcions(){
 	interrupcion_0();
 	delay(10);
 	interrupcion_1();
@@ -44,6 +44,11 @@ bool isTokenValid() {
 
 void api_Run() {
 	Blynk.run();
+}
+
+bool connected() {
+
+	return Blynk.connected();
 }
 
 //----------------------- BLYNK CONECT ------------------------------------

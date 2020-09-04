@@ -17,7 +17,7 @@ void setup() {
    // Serial.begin(74880); Serial.println();
    // Serial.print(sistem);
    // Serial.print(" Debug: "); Serial.println(device);
-  //  wifi_data(device_, sistem, password_d);
+    wifi_data(device_, sistem, password_d);
    // wifi_data("2LightR", "Lot.TiDo", "12345678");
     setupSpiffs();
     WiFiManager_setup();
@@ -46,7 +46,19 @@ void setup() {
 }
 
 void loop() {
-   init_interrupciones();
-   api_Run();
-   OTA_RUN();    
+    offline_funcions(); 
+
+    if( connected() ) {
+        api_Run();
+    }
+    else {
+        static long retardment = 0;
+        if( millis() > retardment ) {
+            api_connect(blynk_Key);
+            retardment = millis() + RECONNECTION_TIME;
+        }
+    }
+    if( connected_wifi() ) {
+        OTA_RUN();
+    }
 }

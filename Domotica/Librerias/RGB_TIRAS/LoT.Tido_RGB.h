@@ -32,13 +32,14 @@ private:
 
 	void set(int red, int green, int blue,int depth);
 	void set(int color[3],int depth);
+
+	//mode
+
 	void fade();
-
-	//modos
-
 	void random_color();
 	
 public:
+
 	RBG_STRIP(int _red_pin, int _green_pin, int _blue_pin):
 		red_pin(_red_pin), green_pin(_green_pin), blue_pin(_blue_pin) {
 	}
@@ -54,4 +55,3 @@ public:
 	void mode(int _mode_rgb);
 	void setSpeed(int _speed);
 };
-

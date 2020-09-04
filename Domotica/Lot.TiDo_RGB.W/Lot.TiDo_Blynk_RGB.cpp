@@ -7,6 +7,7 @@
 #include <Arduino.h>
 #include "LoT.Tido_RGB.h"
 
+#include "delays.h"
 
 //#include "rgb_colors_Hue.h"
 

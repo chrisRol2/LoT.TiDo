@@ -42,6 +42,9 @@
     <ClInclude Include="..\Librerias\esp8266-SerialOTA-master\SerialOTA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="delays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Librerias\RGB_TIRAS\LoT.Tido_RGB.cpp">
@@ -57,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Librerias\esp8266-SerialOTA-master\SerialOTA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="delays.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
