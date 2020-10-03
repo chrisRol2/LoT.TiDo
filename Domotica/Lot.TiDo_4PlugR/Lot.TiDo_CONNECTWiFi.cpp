@@ -1,16 +1,25 @@
-// 
-// 
-// 
+/*
+*	File:
+*	Author:	Christopher Roldan Sanchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Date:
+*	Description:	
+*
+*/
 #include "Lot.TiDo_CONNECTWiFi.h"
 #include <FS.h>          // this needs to be first, or it all crashes and burns...
 #include <WiFiManager.h> // https://github.com/tzapu/WiFiManager
 #include <ArduinoJson.h> // https://github.com/bblanchon/ArduinoJson
 #include <ESP8266WiFi.h>
 #include <strings.h>
+#include "Lot.Todo_RTclock.h"
 
 
-//define your default values here, if there are different values in config.json, they are overwritten.
+//define your default values here, if there are different values in config.json, 
+// they are overwritten.
 char    api_token[34] = "";
+char    api_token2[34] = "";
 char    password_default[32] = "12345678";
 char    name_default[32] = "AutoConnect_Def";
 //void setupSpiffs();
@@ -24,6 +33,9 @@ void wifi_data(char nameAP[], char nameSIS[] , char passwordDEF[]) {
 }
 void get_key(char key_blynk[]) {
     strcpy(key_blynk, api_token);
+}
+void get_key2(char key_blynk[]) {
+    strcpy(key_blynk, api_token2);
 }
 
 void clear_Data() {
@@ -66,6 +78,7 @@ void setupSpiffs() {
                     Serial.println("\nparsed json");
 
                     strcpy(api_token, json["api_token"]);
+                    strcpy(api_token2, json["api_token2"]);
 
                 }
                 else {
@@ -86,15 +99,22 @@ void WiFiManager_setup() {
 
     //set config save notify callback
     wm.setSaveConfigCallback(saveConfigCallback);
-
-    WiFiManagerParameter custom_api_token("api", "Blynk's Token", api_token, 32);
+    
+    WiFiManagerParameter custom_api_token("api",
+                                          "Blynk's Token",
+                                          api_token,
+                                          32);
+    WiFiManagerParameter custom_api_token2("api2",
+                                           "Blynk's 2lightR Token",
+                                           api_token2,
+                                           32);
 
     //add all your parameters here
 
     wm.addParameter(&custom_api_token);
+    wm.addParameter(&custom_api_token2);
 
     if (!wm.autoConnect(name_default, password_default)) {
-   // if (!wm.autoConnect("Hola", "12345678")) {
         Serial.println("failed to connect and hit timeout");
         delay(3000);
         // if we still have not connected restart and try all over again
@@ -107,6 +127,7 @@ void WiFiManager_setup() {
     //read updated parameters
 
     strcpy(api_token, custom_api_token.getValue());
+    strcpy(api_token2, custom_api_token2.getValue());
 
     //save the custom parameters to FS
     if (shouldSaveConfig) {
@@ -115,6 +136,7 @@ void WiFiManager_setup() {
         JsonObject& json = jsonBuffer.createObject();
 
         json["api_token"] = api_token;
+        json["api_token2"] = api_token2;
         
 
         File configFile = SPIFFS.open("/config.json", "w");
@@ -128,11 +150,6 @@ void WiFiManager_setup() {
         //end save
         shouldSaveConfig = false;
     }
-    Serial.print("api_token: "); Serial.println(api_token);
-    Serial.println("local ip");
-    Serial.println(WiFi.localIP());
-    Serial.println(WiFi.gatewayIP());
-    Serial.println(WiFi.subnetMask());
-    Serial.println("Conectado!");
+
 
 }

@@ -4,6 +4,8 @@
 #include "rgb_colors_Hue.h"
 #include "LoT.Tido_RGB.h"
 
+#include "Lot.TiDo_Blynk_RGB.h"
+
 
 void RBG_STRIP::set(int red, int green, int blue,int depth) {
 	depth = pow(2, depth) - 1;
@@ -92,7 +94,7 @@ void RBG_STRIP::refresh() {
 	if( status ) {
 		switch( mode_rgb ) {
 			case 1:
-					set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 10);
+					set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 8);
 				break;
 			case 2: // fade
 				if( firstloop ) {
@@ -167,7 +169,7 @@ void RBG_STRIP::random_color() {
 }
 
 void RBG_STRIP::fade() {
-	static int bits = 10;
+	static int bits = 8;
 	static int valueMAX = pow(2, bits) - 1;
 
 	static int fade_case = 0;
@@ -210,6 +212,9 @@ void RBG_STRIP::fade() {
 			fade_case = 6;
 			break;
 	}
+	char fadecase[3];
+	/*sprintf(fadecase, "fadecase: %d\n",fade_case);
+	terminal(fadecase); */
 
 
 

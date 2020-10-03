@@ -45,6 +45,9 @@
     <ClInclude Include="delays.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Librerias\RGB_TIRAS\Lot.Todo_RTclock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Librerias\RGB_TIRAS\LoT.Tido_RGB.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="delays.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Librerias\RGB_TIRAS\Lot.Todo_RTclock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

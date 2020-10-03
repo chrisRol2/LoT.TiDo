@@ -96,9 +96,7 @@ BLYNK_WRITE(V3)
 	else {
 
 		// Send it back
-		terminal.print("You said:");
-		terminal.write(param.getBuffer(), param.getLength());
-		terminal.println();
+		
 	}
 
 	// Ensure everything is sent

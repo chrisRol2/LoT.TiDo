@@ -3,17 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Due", "Due\Due.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NodeMCU", "NodeMCU\NodeMCU.vcxproj", "{0DE4A500-3944-41FB-A809-97C67EA3BD61}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lot.TiDo_4PlugR", "Lot.TiDo_4PlugR\Lot.TiDo_4PlugR.vcxproj", "{130475F5-C83C-474C-9D29-49930527757B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lot.TiDo_RGB.W", "Lot.TiDo_RGB.W\Lot.TiDo_RGB.W.vcxproj", "{AB9B6D3A-CA1A-49DA-920D-414ABF4A28A1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lot.TiDo_INVERNADERO", "Lot.TiDo_INVERNADERO\Lot.TiDo_INVERNADERO.vcxproj", "{19994923-3ADE-4F2C-99C2-ECB6B3DAAEE7}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lot.TiDo_LUCES", "Lot.TiDo_LUCES\Lot.TiDo_LUCES.vcxproj", "{5211A210-0D39-4127-B991-4AA4F88E46B9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilidades", "Utilidades", "{8511F869-B977-41F6-94EA-69180B759273}"
+	ProjectSection(SolutionItems) = preProject
+		Amanecer.txt = Amanecer.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +18,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.ActiveCfg = Debug|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
-		{0DE4A500-3944-41FB-A809-97C67EA3BD61}.Debug|x86.ActiveCfg = Debug|Win32
-		{0DE4A500-3944-41FB-A809-97C67EA3BD61}.Debug|x86.Build.0 = Debug|Win32
-		{0DE4A500-3944-41FB-A809-97C67EA3BD61}.Release|x86.ActiveCfg = Release|Win32
-		{0DE4A500-3944-41FB-A809-97C67EA3BD61}.Release|x86.Build.0 = Release|Win32
 		{130475F5-C83C-474C-9D29-49930527757B}.Debug|x86.ActiveCfg = Debug|Win32
 		{130475F5-C83C-474C-9D29-49930527757B}.Debug|x86.Build.0 = Debug|Win32
 		{130475F5-C83C-474C-9D29-49930527757B}.Release|x86.ActiveCfg = Release|Win32
@@ -37,14 +26,6 @@ Global
 		{AB9B6D3A-CA1A-49DA-920D-414ABF4A28A1}.Debug|x86.Build.0 = Debug|Win32
 		{AB9B6D3A-CA1A-49DA-920D-414ABF4A28A1}.Release|x86.ActiveCfg = Release|Win32
 		{AB9B6D3A-CA1A-49DA-920D-414ABF4A28A1}.Release|x86.Build.0 = Release|Win32
-		{19994923-3ADE-4F2C-99C2-ECB6B3DAAEE7}.Debug|x86.ActiveCfg = Debug|Win32
-		{19994923-3ADE-4F2C-99C2-ECB6B3DAAEE7}.Debug|x86.Build.0 = Debug|Win32
-		{19994923-3ADE-4F2C-99C2-ECB6B3DAAEE7}.Release|x86.ActiveCfg = Release|Win32
-		{19994923-3ADE-4F2C-99C2-ECB6B3DAAEE7}.Release|x86.Build.0 = Release|Win32
-		{5211A210-0D39-4127-B991-4AA4F88E46B9}.Debug|x86.ActiveCfg = Debug|Win32
-		{5211A210-0D39-4127-B991-4AA4F88E46B9}.Debug|x86.Build.0 = Debug|Win32
-		{5211A210-0D39-4127-B991-4AA4F88E46B9}.Release|x86.ActiveCfg = Release|Win32
-		{5211A210-0D39-4127-B991-4AA4F88E46B9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

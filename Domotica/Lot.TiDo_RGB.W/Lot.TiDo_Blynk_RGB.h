@@ -2,9 +2,9 @@
 
 
 
-char api_connect(char token[]);
+char api_connect(char token[], char token2[]);
 void api_Run();
 bool isTokenValid();
 void offline_funcions();
 bool connected();
-void terminal_println(char cosa[]);
+void terminal(char printeable[]);

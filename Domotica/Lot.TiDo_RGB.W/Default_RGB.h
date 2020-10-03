@@ -1,4 +1,4 @@
-#define RED_PIN   0
+#define RED_PIN   3
 #define GREEN_PIN 1
 #define BLUE_PIN  2
 

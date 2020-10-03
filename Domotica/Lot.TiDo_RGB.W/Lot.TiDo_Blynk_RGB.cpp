@@ -6,7 +6,7 @@
 #include <BlynkSimpleEsp8266.h>
 #include <Arduino.h>
 #include "LoT.Tido_RGB.h"
-
+#include <string.h>
 #include "delays.h"
 
 //#include "rgb_colors_Hue.h"
@@ -15,24 +15,20 @@
 
 RBG_STRIP desktop(RED_PIN, GREEN_PIN, BLUE_PIN);
 
-WidgetTerminal terminal(V3);
-BLYNK_WRITE(V1) {
-	int data = param.asInt();
-	if (data){
-		terminal.println("conecto");
-	}
-	else {
-		terminal.println("no conecto");
-	}
-	terminal.flush();
-}
-void terminal_println(char cosa[]) {
-	terminal.print(cosa);
-	terminal.flush();
+
+WidgetBridge Light2(V1);
+char token2s[34]="";
+void terminal(char printeable[]) {
+
+	Light2.virtualWrite(V3, printeable);
+
 }
 
-char api_connect(char token[]) {
+
+char api_connect(char token[],char token2[]) {
 	Blynk.begin(token, NULL, NULL);
+	Light2.setAuthToken(token2);
+	strcpy(token2s, token2);
 	Blynk.syncAll();
 	
 	return Blynk.connected();
@@ -77,6 +73,7 @@ BLYNK_WRITE(V14) {
 BLYNK_WRITE(V34) {
 	volatile int modes = param.asInt();
 	Blynk.syncVirtual(V14);
+	
 	switch( modes ) {
 		case 1:
 			break;
@@ -103,4 +100,11 @@ BLYNK_WRITE(V34) {
 BLYNK_WRITE(V30) {
 
 	desktop.setSpeed(param.asInt());
+}
+BLYNK_WRITE(V5) {
+	volatile int value = param.asInt();
+	desktop.change(value);
+	Blynk.virtualWrite(V29, value);
+	Light2.virtualWrite(V1, value);
+	Light2.virtualWrite(V2, value);
 }

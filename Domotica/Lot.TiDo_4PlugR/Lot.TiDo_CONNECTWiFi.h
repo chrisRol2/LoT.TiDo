@@ -19,6 +19,7 @@
 
 void wifi_data(char nameAP[], char nameSIS[], char passwordDEF[]);
 void get_key(char key_blynk[]);
+void get_key2(char key_blynk[]);
 void setupSpiffs();
 void WiFiManager_setup();
 void clear_Data();
