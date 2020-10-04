@@ -13,7 +13,7 @@
 #include <ArduinoJson.h> // https://github.com/bblanchon/ArduinoJson
 #include <ESP8266WiFi.h>
 #include <strings.h>
-#include "Lot.Todo_RTclock.h"
+//#include "Lot.Todo_RTclock.h"
 
 
 //define your default values here, if there are different values in config.json, 

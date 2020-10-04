@@ -18,6 +18,8 @@ private:
 	int green_pin;
 	int blue_pin;
 
+	int colorFuncions[3] = {0,0,0};
+
 	int RED_VALUE;
 	int GREEN_VALUE;
 	int BLUE_VALUE;
@@ -30,12 +32,19 @@ private:
 
 	int speed;
 
+	int destCont = 6;
+
+	char cadena[200];
+	void toVec(int red, int green, int blue,int vec[3]);
+
+
 	void set(int red, int green, int blue,int depth);
 	void set(int color[3],int depth);
 
 	//mode
-
-	void fade();
+	void test();
+	bool compare( int color[3],int color2[3]);
+	void fade(int color[50][3],int cantidad);
 	void random_color();
 	
 public:

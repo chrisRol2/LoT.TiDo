@@ -27,7 +27,8 @@
 #define	rojo		27
 #define	blanco		28
 
-int colores[27][3] = {
+#define coloresCant 27
+int colores[coloresCant][3] = {
 	{255, 0, 0},
 	{255, 64, 0},
 	{255, 128, 0},
@@ -55,4 +56,15 @@ int colores[27][3] = {
 	{255, 0, 0},
 	{255, 255, 255},
 	{0,0,0}
+};
+
+#define amanecerCant 7
+ int amanecer[amanecerCant][3] = {
+	{0,0,0},
+	{255,0,0},
+	{255,100,0},
+	{255,0,200},
+	{255,255,200},
+	{255,255,255},
+	{255,0,80}
 };

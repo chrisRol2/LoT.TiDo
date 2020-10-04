@@ -4,3 +4,22 @@ RGB(156,4,0)
 RGB(222,35,4)
 RGB(246,59,4)
 RGB(240,230,116)
+
+
+
+	static int dest = 0;
+	
+
+	if( !compare(colores[dest], colorFuncions) ) {
+		for( int i = 0; i < 3; i++ ) {
+			if( colorFuncions[i] < colores[dest][i] )colorFuncions[i]++;
+			else if( colorFuncions[i] > colores[dest][i] )colorFuncions[i]--;
+		}
+	}
+	else {
+		destCont++;
+		dest = destCont % cantColors;
+		sprintf(cadena, "Estado: %d", dest);
+		terminal(cadena);
+	}
+	set(colorFuncions, 8);
