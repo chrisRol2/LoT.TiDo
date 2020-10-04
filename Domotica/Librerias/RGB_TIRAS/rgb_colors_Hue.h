@@ -1,3 +1,11 @@
+/*
+*	File:
+*	Author:	Christopher Roldan Sanchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Date:
+*	Description:
+*/
 #define	rojo1		0
 #define	rojo2		1
 #define	naranja		2

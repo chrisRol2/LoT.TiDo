@@ -1,15 +1,18 @@
-// LoT.h
-
+/*
+*	File:
+*	Author:	Christopher Roldan Sanchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Date:
+*	Description:	
+*/
 #ifndef _LoT.Tido_RGB_h
 #define _LoT.Tido_RGB_h
-
 #if defined(ARDUINO) && ARDUINO >= 100
 	#include "arduino.h"
 #else
 	#include "WProgram.h"
 #endif
-
-
 #endif
 
 class RBG_STRIP {
@@ -25,19 +28,14 @@ private:
 	int BLUE_VALUE;
 
 	int brightness;
-
-	bool status;
-
+	int speed;
 	int mode_rgb;
 
-	int speed;
-
+	int status;
 	int destCont = 6;
-
 	char cadena[200];
+
 	void toVec(int red, int green, int blue,int vec[3]);
-
-
 	void set(int red, int green, int blue,int depth);
 	void set(int color[3],int depth);
 
@@ -46,9 +44,7 @@ private:
 	bool compare( int color[3],int color2[3]);
 	void fade(int color[50][3],int cantidad);
 	void random_color();
-	
 public:
-
 	RBG_STRIP(int _red_pin, int _green_pin, int _blue_pin):
 		red_pin(_red_pin), green_pin(_green_pin), blue_pin(_blue_pin) {
 	}

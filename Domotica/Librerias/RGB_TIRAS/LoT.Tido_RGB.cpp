@@ -1,17 +1,22 @@
-// 
-// 
-// 
+/*
+*	File:
+*	Author:	Christopher Roldan Sanchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Date:
+*	Description:
+*
+*/
 #include "rgb_colors_Hue.h"
 #include "LoT.Tido_RGB.h"
-
 #include "Lot.TiDo_Blynk_RGB.h"
-bool RBG_STRIP::compare(int color[3],int color2[3]) {
+bool RBG_STRIP::compare(int color[3], int color2[3]) {
 	for( int i = 0; i < 3; i++ ) {
 		if( color[i] != color2[i] )return false;
 	}
 	return true;
 }
-void RBG_STRIP::set(int red, int green, int blue,int depth) {
+void RBG_STRIP::set(int red, int green, int blue, int depth) {
 	depth = pow(2, depth) - 1;
 	volatile int redB = map(red, 0, depth, 0, brightness);
 	volatile int greenB = map(green, 0, depth, 0, brightness);
@@ -21,7 +26,7 @@ void RBG_STRIP::set(int red, int green, int blue,int depth) {
 	analogWrite(green_pin, greenB);
 	analogWrite(blue_pin, blueB);
 }
-void RBG_STRIP::set( int color[3],int depth) {
+void RBG_STRIP::set(int color[3], int depth) {
 	depth = pow(2, depth) - 1;
 	volatile int redB = map(color[0], 0, depth, 0, brightness);
 	volatile int greenB = map(color[1], 0, depth, 0, brightness);
@@ -31,7 +36,7 @@ void RBG_STRIP::set( int color[3],int depth) {
 	analogWrite(green_pin, greenB);
 	analogWrite(blue_pin, blueB);
 }
-void RBG_STRIP::change(int _status) {	
+void RBG_STRIP::change(int _status) {
 	status = _status;
 	refresh();
 }
@@ -81,15 +86,14 @@ void RBG_STRIP::random_color() {
 	volatile int seleccion = random(0, 24);
 	set(colores[seleccion], 8);
 }
-void RBG_STRIP::fade(int color[50][3],int cantidad) {
+void RBG_STRIP::fade(int color[50][3], int cantidad) {
 	static int dest = 0;
 	if( !compare(color[dest], colorFuncions) ) {
 		for( int i = 0; i < 3; i++ ) {
 			if( colorFuncions[i] < color[dest][i] )colorFuncions[i]++;
 			else if( colorFuncions[i] > color[dest][i] )colorFuncions[i]--;
 		}
-	}
-	else {
+	} else {
 		destCont++;
 		dest = destCont % cantidad;
 		sprintf(cadena, "Estado: %d", dest);
@@ -103,14 +107,13 @@ void RBG_STRIP::refresh() {
 	static bool  modes_toggle = false;
 	static int previus_mode = 0;
 	static unsigned long delayModespeed = 0;
-	
+
 	if( mode_rgb != previus_mode ) {
 		firstloop = true;
 		previus_mode = mode_rgb;
 		delayModespeed = millis() + speed;
 	}
-
-	if( status ) {
+	if( status == 1 ) {
 		switch( mode_rgb ) {
 			case 1:
 				set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 8);
@@ -124,7 +127,7 @@ void RBG_STRIP::refresh() {
 				}
 				if( micros() > delayModespeed ) {
 					delayModespeed = micros() + (speed * 1000) / 5;
-					fade(colores,25);
+					fade(colores, 25);
 				}
 				break;
 			case 3: // flash				
@@ -133,10 +136,8 @@ void RBG_STRIP::refresh() {
 					if( modes_toggle ) {
 						set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 8);
 						modes_toggle = false;
-					}
-					else {
-						set(0, 0, 0, 1);
-						modes_toggle = true;
+					} else {
+						set(0, 0, 0, 1); modes_toggle = true;
 					}
 				}
 				break;
@@ -148,13 +149,12 @@ void RBG_STRIP::refresh() {
 				break;
 			case 5: // pulse
 				if( firstloop ) {
-					firstloop = false;
-					modes_cont = 0;
+					firstloop = false; modes_cont = 0;
 				}
 				if( micros() > delayModespeed ) {
-					delayModespeed = micros() + (speed*1000) / 5;
-					modes_cont+= 0.005;
-					brightness = (int)(509 * sin(modes_cont ) + 514);
+					delayModespeed = micros() + (speed * 1000) / 5;
+					modes_cont += 0.005;
+					brightness = (int) (509 * sin(modes_cont) + 514);
 					set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 8);
 				}
 				break;
@@ -162,10 +162,14 @@ void RBG_STRIP::refresh() {
 				break;
 		}
 	}
-	else {
+	else if( status == -1 ) {
+
+	}
+	else{
+		
 		set(0, 0, 0, 8);
 	}
 }
-void RBG_STRIP::test() {	
+void RBG_STRIP::test() {
 
 }

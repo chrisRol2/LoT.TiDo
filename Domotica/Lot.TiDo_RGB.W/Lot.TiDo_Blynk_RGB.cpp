@@ -1,6 +1,12 @@
-
+/*
+*	File:
+*	Author:	Christopher Roldan Sanchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Date:
+*	Description:
+*/
 #include "Default_RGB.h"
-//
 #include "Lot.TiDo_Blynk_RGB.h"
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
