@@ -1,4 +1,12 @@
-// LoT.TiDo_OTA.h
+/*
+*	File:	LoT.TiDo_OTA.h
+*	Author:	Christopher Roldán Sánchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Created:
+*	Update Date:
+*	Description: 
+*/
 
 #ifndef _LOT.TIDO_OTA_h
 #define _LOT.TIDO_OTA_h

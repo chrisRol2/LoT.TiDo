@@ -1,3 +1,13 @@
+/*
+*	File:	Lot.TiDo_4PlugR.ino
+*	Author:	Christopher Roldán Sánchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Created:
+*	Update Date:
+*	Description: 
+*/
+
 #include "LoT.TiDo_OTA.h"
 #include "Lot.TiDo_CONNECTWiFi.h"
 #include "Lot.TiDo_Blynk_4lightR.h"
@@ -5,6 +15,7 @@
 #include "Defaults_2LightR.h"
 
 char blynk_Key[34] = "";
+char blynk_Key2[34] = "";
 void test() {
     
 }
@@ -22,10 +33,12 @@ void setup() {
     setupSpiffs();
     WiFiManager_setup();
     get_key(blynk_Key);
+    get_key(blynk_Key2);
+
 
     OTA_SETUP(device_, password_d);
 
-    if (!api_connect(blynk_Key)) {
+    if( !api_connect(blynk_Key, blynk_Key2) ) {
       //  Serial.println("No conecto blynk");
         if (!isTokenValid()) {
            // clear_Data();
@@ -54,7 +67,7 @@ void loop() {
     else {
         static long retardment = 0;
         if( millis() > retardment ) {
-            api_connect(blynk_Key);
+            api_connect(blynk_Key, blynk_Key2);
             retardment = millis() + RECONNECTION_TIME;
         }
     }

@@ -1,4 +1,12 @@
-// Lot.TiDo_CONNECTWiFi.h
+/*
+*	File:	Lot.TiDo_CONNECTWiFi.h
+*	Author:	Christopher Roldán Sánchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Created:
+*	Update Date:
+*	Description: 
+*/
 
 #ifndef _LOT.TIDO_CONNECTWIFI_h
 #define _LOT.TIDO_CONNECTWIFI_h

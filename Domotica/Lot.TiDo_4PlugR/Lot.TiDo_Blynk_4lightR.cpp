@@ -22,6 +22,7 @@ bool estado_1 = true;
 
 
 WidgetTerminal terminal(V3);
+WidgetBridge LOT_RGB(V0);
 //-------------------------------------------------------------------------
 //----------------------- BLYNK CONECT ------------------------------------
 void offline_funcions(){
@@ -30,10 +31,12 @@ void offline_funcions(){
 	interrupcion_1();
 	delay(10);
 }
-
-char api_connect(char token[]) {
+char aa[34];
+char api_connect(char token[],char token2[]) {
 	Blynk.begin(token, NULL, NULL);
-	Blynk.syncVirtual(V1,V2);
+	LOT_RGB.setAuthToken(token2);
+	strcpy(aa, token2);
+	Blynk.syncVirtual(V4, V2);
 	return Blynk.connected();
 }
 
@@ -55,8 +58,7 @@ bool connected() {
 //-------------------------------------------------------------------------
 
 
-BLYNK_WRITE(V1)
-{
+BLYNK_WRITE(V4){
 	int pinValue = param.asInt(); // assigning incoming value from pin V1 to a variable
 	if (pinValue == 1) {
 		estado_0 = true;
@@ -66,8 +68,7 @@ BLYNK_WRITE(V1)
 	}	
 	digitalWrite(light_0, !estado_0);
 }
-BLYNK_WRITE(V2)
-{
+BLYNK_WRITE(V2){
 
 	int pinValue = param.asInt(); // assigning incoming value from pin V1 to a variable
 	if (pinValue == 1) {
@@ -79,8 +80,7 @@ BLYNK_WRITE(V2)
 	digitalWrite(light_1, !estado_1);
 }
 
-BLYNK_WRITE(V3)
-{
+BLYNK_WRITE(V3){
 	String input_terminal = param.asStr();
 	// if you type "Marco" into Terminal Widget - it will respond: "Polo:"
 	if (String("Marco") == input_terminal) {
@@ -93,19 +93,21 @@ BLYNK_WRITE(V3)
 	else if (String("reset") == input_terminal) {
 		ESP.restart();
 	}
-	else {
-
-		// Send it back
-		
+	else if( String("a") == input_terminal ) {
+		LOT_RGB.virtualWrite(V29, LOW);
+		terminal.print("aa: ");
+		terminal.println(aa);
 	}
-
+	else {
+		// Send it back
+	}
 	// Ensure everything is sent
 	terminal.flush();
 }
 
-//----------------------- BLYNK VIRTUAL PIN  ------------------------------
-//-------------------------------------------------------------------------
-//------------------------- INTERRUPCIONES --------------------------------
+//----------------------- BLYNK VIRTUAL PIN  ---------------------------
+//----------------------------------------------------------------------
+//------------------------- INTERRUPCIONES -----------------------------
 int off_all = 0;
 int double_clic = 0, double_cont;
 void interrupcion_0() {
@@ -116,7 +118,7 @@ void interrupcion_0() {
 		if (light_0_EstadoActual == HIGH) {
 			estado_0 = !estado_0;
 			digitalWrite(light_0, !estado_0);
-			Blynk.virtualWrite(V1, estado_0);	
+			Blynk.virtualWrite(V4, estado_0);	
 			off_all = 0;
 		}
 	}
@@ -126,10 +128,10 @@ void interrupcion_0() {
 		delay(1);
 	}
 	else if (off_all >= 40) {
-
+		LOT_RGB.virtualWrite(V29, 0);
 		estado_0 = false;
 		digitalWrite(light_0, !estado_0);
-		Blynk.virtualWrite(V1, estado_0);
+		Blynk.virtualWrite(V4, estado_0);
 
 		estado_1 = false;
 		digitalWrite(light_1, !estado_1);
@@ -141,12 +143,8 @@ void interrupcion_0() {
 		off_all = 0;
 
 	}
-
-
-
 	// save the current state as the last state, for next time through the loop
 	light_0_EstadoAnterior = light_0_EstadoActual;
-
 }
 
 void interrupcion_1() {
@@ -169,7 +167,7 @@ void interrupcion_1() {
 		
 		estado_0 = true;
 		digitalWrite(light_0, !estado_0);
-		Blynk.virtualWrite(V1, estado_0);
+		Blynk.virtualWrite(V4, estado_0);
 
 		estado_1 = true;
 		digitalWrite(light_1, !estado_1);
@@ -185,11 +183,11 @@ void interrupcion_1() {
 		off_all++;
 		delay(1);
 	}
-	else if(off_all >= 40) {
-
+	else if(off_all >= 30) {
+	
 		estado_0 = false;
 		digitalWrite(light_0, !estado_0);
-		Blynk.virtualWrite(V1, estado_0);
+		Blynk.virtualWrite(V4, estado_0);
 
 		estado_1 = false;
 		digitalWrite(light_1, !estado_1);
@@ -200,14 +198,13 @@ void interrupcion_1() {
 		terminal.flush();
 		off_all = 0;
 		double_cont = double_clic = 0;
-
+	
 	}
 	else {
 		double_cont++;
 		delay(1);
 		if (double_cont >= 20) {
 			double_cont = double_clic = 0;
-			
 		}
 	}
 	// save the current state as the last state, for next time through the loop

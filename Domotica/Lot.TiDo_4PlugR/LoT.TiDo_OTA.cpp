@@ -1,6 +1,13 @@
-// 
-// 
-// 
+/*
+*	File:	LoT.TiDo_OTA.cpp
+*	Author:	Christopher Roldán Sánchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Created:
+*	Update Date:
+*	Description: 
+*/
+
 
 #include "LoT.TiDo_OTA.h"
 

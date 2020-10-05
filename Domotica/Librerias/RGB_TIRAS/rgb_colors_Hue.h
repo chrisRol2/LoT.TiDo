@@ -1,9 +1,9 @@
 /*
-*	File:
+*	File:	rgb_colors_Hue.h
 *	Author:	Christopher Roldan Sanchez
 *	Mail:	Christopher_Rol@hotmail.es
 *   Web:    https://www.lot-tido.com
-*	Date:
+*	Update Date:
 *	Description:
 */
 #define	rojo1		0
@@ -66,10 +66,11 @@ int colores[coloresCant][3] = {
 	{0,0,0}
 };
 
-#define amanecerCant 7
+#define amanecerCant 8
  int amanecer[amanecerCant][3] = {
 	{0,0,0},
 	{255,0,0},
+	{255,8,0},
 	{255,100,0},
 	{255,0,200},
 	{255,255,200},
