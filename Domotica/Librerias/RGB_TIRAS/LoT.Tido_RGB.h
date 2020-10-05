@@ -1,10 +1,10 @@
 /*
-*	File:
+*	File:	LoT.Tido_RGB.h
 *	Author:	Christopher Roldan Sanchez
 *	Mail:	Christopher_Rol@hotmail.es
 *   Web:    https://www.lot-tido.com
-*	Date:
-*	Description:	
+*	Update Date:	05-OCT-2020
+*	Description: Class for general operation of lights (RGB STRIP, WHITE, 220VAC).
 */
 #ifndef _LoT.Tido_RGB_h
 #define _LoT.Tido_RGB_h
@@ -33,6 +33,9 @@ private:
 
 	int status;
 	int destCont = 6;
+	bool firstloop = true;
+	float modes_cont;
+	int previus_mode = 0;
 	char cadena[200];
 
 	void toVec(int red, int green, int blue,int vec[3]);
@@ -40,10 +43,12 @@ private:
 	void set(int color[3],int depth);
 
 	//mode
-	void test();
+	void defaultMode();
 	bool compare( int color[3],int color2[3]);
 	void fade(int color[50][3],int cantidad);
+	void flash();
 	void random_color();
+	void pulse();
 public:
 	RBG_STRIP(int _red_pin, int _green_pin, int _blue_pin):
 		red_pin(_red_pin), green_pin(_green_pin), blue_pin(_blue_pin) {
@@ -54,9 +59,9 @@ public:
 	void off();
 	void change(int _status);
 	void toggle();
+	void refresh();
 	void setBrightness(int _brightness);
 	void getColor(int rgb[3]);
-	void refresh();
 	void mode(int _mode_rgb);
 	void setSpeed(int _speed);
 };
