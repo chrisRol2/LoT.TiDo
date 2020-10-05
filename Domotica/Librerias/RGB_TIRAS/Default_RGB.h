@@ -22,3 +22,5 @@
 #define FLASH 3
 #define RANDOM 4
 #define PULSE 5
+
+static const char ntpServerName[] = "us.pool.ntp.org";
