@@ -1,3 +1,13 @@
+/*
+*	File:	SerialOTA.h
+*	Author:	Christopher Roldán Sánchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Created:
+*	Update Date:
+*	Description: 
+*/
+
 #ifndef _serialOTA_
 
 #define _serialOTA_
