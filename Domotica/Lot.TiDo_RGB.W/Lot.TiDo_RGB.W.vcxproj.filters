@@ -42,10 +42,7 @@
     <ClInclude Include="..\Librerias\esp8266-SerialOTA-master\SerialOTA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="delays.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Librerias\RGB_TIRAS\Lot.Todo_RTclock.h">
+    <ClInclude Include="..\Librerias\RGB_TIRAS\reloj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,11 +62,16 @@
     <ClCompile Include="..\Librerias\esp8266-SerialOTA-master\SerialOTA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="delays.cpp">
+    <ClCompile Include="..\Librerias\RGB_TIRAS\reloj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Librerias\RGB_TIRAS\Lot.Todo_RTclock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="notes.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="README.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
