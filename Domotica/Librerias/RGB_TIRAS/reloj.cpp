@@ -9,35 +9,143 @@
 *
 */
 #include "reloj.h"
-
-
-bool reloj_calendario::setHora(int _hora, int _minutos, int _segundos){
-	hora_actual = _hora;
-	minutos_actual = _minutos;
-	segundos_actual = _segundos;	
-	return true;
+#include <TimeLib.h>
+#include <ESP8266WiFi.h>
+#include <WiFiUdp.h>
+#include "Default_RGB.h"
+WiFiUDP Udp;
+unsigned int localPort = 8888;  // local port to listen for UDP packets
+const int NTP_PACKET_SIZE = 48; // NTP time is in the first 48 bytes of message
+byte packetBuffer[NTP_PACKET_SIZE]; //buffer to hold incoming & outgoing packets
+void sendNTPpacket(IPAddress &address);
+reloj_calendario::reloj_calendario(int _timeZone) {
+	timeZone1 = _timeZone;
 }
+bool reloj_calendario::init() {
+	Udp.begin(localPort);
+	setSyncProvider(getNtpTime);
+	setSyncInterval(300);
+}
+time_t reloj_calendario::getNtpTime() {
+	IPAddress ntpServerIP; // NTP server's ip address
 
-bool reloj_calendario::setFecha(int _dia, int _dia_semana, int _mes, int _anio){
-	volatile bool fecha_ok =
-		(_dia != -1) &&
-		(_dia_semana != -1) &&
-		(_mes != -1) && 
-		(_anio >= 2019);
-	if(fecha_ok){
-		dia_actual = _dia;
-		dia_semana_actual = _dia_semana;
-		mes_actual = _mes;
-		anio_actual = _anio;
+	while (Udp.parsePacket() > 0) ; // discard any previously received packets
+	Serial.println("Transmit NTP Request");
+	// get a random server from the pool
+	WiFi.hostByName(ntpServerName, ntpServerIP);
+	Serial.print(ntpServerName);
+	Serial.print(": ");
+	Serial.println(ntpServerIP);
+	sendNTPpacket(ntpServerIP);
+	uint32_t beginWait = millis();
+	while (millis() - beginWait < 1500) {
+		int size = Udp.parsePacket();
+		if (size >= NTP_PACKET_SIZE) {
+			Serial.println("Receive NTP Response");
+			Udp.read(packetBuffer, NTP_PACKET_SIZE);  // read packet into the buffer
+			unsigned long secsSince1900;
+			// convert four bytes starting at location 40 to a long integer
+			secsSince1900 =  (unsigned long)packetBuffer[40] << 24;
+			secsSince1900 |= (unsigned long)packetBuffer[41] << 16;
+			secsSince1900 |= (unsigned long)packetBuffer[42] << 8;
+			secsSince1900 |= (unsigned long)packetBuffer[43];
+			return secsSince1900 - 2208988800UL + timeZone * SECS_PER_HOUR;
+		}
+	}
+	Serial.println("No NTP Response :-(");
+	return 0; // return 0 if unable to get the time
+}
+int reloj_calendario::hora(){
+	return hour();
+}
+int reloj_calendario::minutos() {
+	return minute();
+}
+int reloj_calendario::segundos() {
+	return second();
+}
+int reloj_calendario::dia(){
+	return day();
+}
+int reloj_calendario::dia_semana() {
+	return weekday();
+}
+int reloj_calendario::mes(){
+	return month();
+}
+int reloj_calendario::anio(){
+	return year();
+}
+bool reloj_calendario::status() {
+	if( estado ) {
+		if( hora() != horaAlarm ) return false;
+		if( minute() != minutoAlarm )return false;
+		if( (dia_semana() != diaSemanaAlarm) ||
+		   (dia_semana() == -1) ) return false;
 		return true;
-	}	
+	} 
 	return false;
 }
-
-int reloj_calendario::anio(void) {
-	return anio_actual;
+void reloj_calendario::enable(){
+	estado = true;
 }
+void reloj_calendario::disable() {
+	estado = false;
+}
+void reloj_calendario::setHora(int _hora, int _minutos){
+	horaAlarm = _hora;
+	minutoAlarm = _minutos;
+}
+void reloj_calendario::setFecha(int _dia, int _dia_semana,
+								int _mes, int _anio) {
+	diaAlarm = _dia;
+	diaSemanaAlarm = _dia_semana;
+	mesAlarm = _mes;
+	anioAlarm = _anio;
+}
+void reloj_calendario::getFecha(char cadena[11]){
+	char aux[10];
+	char aux1[10];
+	char aux2[10];
+	if( diaAlarm < 10 ) sprintf(aux, "0%d",diaAlarm);
+	else sprintf(aux, "%d/",diaAlarm);
+	if( mesAlarm < 10 ) sprintf(aux1, "0%d", mesAlarm);
+	else sprintf(aux1, "%d/",mesAlarm);
+	if( anioAlarm < 10 )        sprintf(aux2, "000%d", anioAlarm);
+	else if( anioAlarm < 100 )  sprintf(aux2, "00%d", anioAlarm);
+	else if( anioAlarm < 1000 ) sprintf(aux2, "0%d", anioAlarm);
+	sprintf(cadena, "%s/%s/%s", aux,aux1,aux2);
+}
+void reloj_calendario::getHora(char cadena[11]) {
+	char aux[10];
+	char aux1[10];
+	if( horaAlarm < 10 ) sprintf(aux, "0%d",horaAlarm );
+	else sprintf(aux, "%d",horaAlarm );
+	if( minutoAlarm < 10 ) sprintf(aux, "0%d",minutoAlarm );
+	else sprintf(aux, "%d",minutoAlarm );
+	sprintf(cadena, "%s:%s", aux,aux1);
 
+}
+void sendNTPpacket(IPAddress &address){
+	// set all bytes in the buffer to 0
+	memset(packetBuffer, 0, NTP_PACKET_SIZE);
+	// Initialize values needed to form NTP request
+	// (see URL above for details on the packets)
+	packetBuffer[0] = 0b11100011;   // LI, Version, Mode
+	packetBuffer[1] = 0;     // Stratum, or type of clock
+	packetBuffer[2] = 6;     // Polling Interval
+	packetBuffer[3] = 0xEC;  // Peer Clock Precision
+							 // 8 bytes of zero for Root Delay & Root Dispersion
+	packetBuffer[12] = 49;
+	packetBuffer[13] = 0x4E;
+	packetBuffer[14] = 49;
+	packetBuffer[15] = 52;
+	// all NTP fields have been given values, now
+	// you can send a packet requesting a timestamp:
+	Udp.beginPacket(address, 123); //NTP requests are to port 123
+	Udp.write(packetBuffer, NTP_PACKET_SIZE);
+	Udp.endPacket();
+}
 bool noBlockDelay(unsigned long *time, int delayMillis) {
 	if( millis() > *time ) {
 		*time = millis() + delayMillis;
@@ -52,7 +160,6 @@ bool noBlockDelayMicros(unsigned long *time, int delayMicros) {
 	}
 	return false;
 }
-
 bool noBlockDelayFuncion(unsigned long *time, int delayMillis, 
 						 void (*funcion)()) {
 	if( millis() > *time ) {

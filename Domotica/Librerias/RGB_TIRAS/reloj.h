@@ -24,44 +24,37 @@
 
 class reloj_calendario{
 	private:
-		int husoHorario;
-		int hora_actual;
-		int minutos_actual;
-		int segundos_actual;
-		int dia_actual;
-		int dia_semana_actual;
-		int mes_actual;
-		int anio_actual;
-		int getHora();
-		int getFecha();
-		
+
+		static int timeZone;     // Central European Time
+		int timeZone1;     // Central European Time
+		//hora
+		int horaAlarm;
+		int minutoAlarm;
+		int segundoAlarm = 0;
+		//fecha
+		int diaAlarm;
+		int mesAlarm;
+		int anioAlarm;
+		int diaSemanaAlarm;
+		bool estado;
+		void getHora(char cadena[11]);
+		void getFecha(char cadena[11]);
+		static time_t getNtpTime();
 	public:
-		reloj_calendario(int _husoHorario): husoHorario(_husoHorario){}
-		virtual bool setHora(int _hora, int _minutos, int _segundos);
-		bool setFecha(int _dia, int _dia_semana, int _mes, int _anio);
+		reloj_calendario(int _timeZone);
+		bool init();
+		void setHora(int _hora, int _minutos);
+		void setFecha(int _dia, int _dia_semana, int _mes, int _anio);
 		int hora(void);
 		int minutos(void);
 		int segundos(void);
 		int dia(void);
 		int dia_semana(void);
 		int mes(void);
-		int anio(void);		
-};
-
-class alarma : private reloj_calendario{
-	private:
-		bool activado;
-		bool repeticion;
-		bool repeticion_dia;
-		int sonido;
-		int rep_tiempo;
-	public:
-		alarma(int _hora, int _minutos, int _segundos,bool _repeticion, 
-			   bool _repeticion_dia, int _sonido, int _repTiempo);
-		bool sonar(bool estado = true);
-		bool setHora(int _hora, int _minutos, int _segundos);
-		void setSonido();
-		void setRepDia();
+		int anio(void);
+		bool status(void);
+		void enable(void);
+		void disable(void);
 };
 
 bool noBlockDelay(unsigned long *time, int delayMillis);
