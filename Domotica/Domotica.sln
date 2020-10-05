@@ -8,6 +8,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lot.TiDo_RGB.W", "Lot.TiDo_RGB.W\Lot.TiDo_RGB.W.vcxproj", "{AB9B6D3A-CA1A-49DA-920D-414ABF4A28A1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilidades", "Utilidades", "{8511F869-B977-41F6-94EA-69180B759273}"
+	ProjectSection(SolutionItems) = preProject
+		test.c = test.c
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
