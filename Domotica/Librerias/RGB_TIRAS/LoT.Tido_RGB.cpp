@@ -12,8 +12,8 @@
 #include "Lot.TiDo_Blynk_RGB.h"
 #include "reloj.h"
 #include "Default_RGB.h"
+reloj_calendario despertador(-3);
 
-reloj_calendario RTClock(-3);
 
 bool RBG_STRIP::compare(int color[3], int color2[3]) {
 	for( int i = 0; i < 3; i++ ) {
