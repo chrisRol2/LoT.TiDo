@@ -1,0 +1,26 @@
+/*
+*	File:	notes.txt
+*	Author:	Christopher Roldán Sánchez
+*	Mail:	Christopher_Rol@hotmail.es
+*   Web:    https://www.lot-tido.com
+*	Created:
+*	Update Date:
+*	Description: 
+*/
+URGENTE:
+
+BUGS CONOCIDOS:
+	[0001]PERDIDA DE ENERGIA, REBOOTEO ERRONEO.
+	[0002]DESTELLOS ESTANDO APAGADO.
+	[0003]BRIDGE FISICO, NO APAGA LEDS
+
+IDEAS BUGS:
+	[0001] DRIVER PULLUP.
+
+PENDIENTE:
+	Alarma despertador
+	Ordenar ficheros de librerias
+	Amanecer
+
+LOGROS:
+	Apagado general desde la app
