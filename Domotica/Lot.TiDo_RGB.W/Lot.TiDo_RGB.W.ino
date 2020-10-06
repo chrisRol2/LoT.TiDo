@@ -51,6 +51,9 @@ void setup() {
 // the loop function runs over and over again until power down or reset
 void loop() {
 
+    if( connected_wifi() ) {
+        OTA_RUN();
+    }
     if( connected() ) {
         api_Run();
     }
@@ -60,9 +63,6 @@ void loop() {
             api_connect(blynk_Key, blynk_Key2);
             retardment = millis() + RECONNECTION_TIME;
         }
-    }
-    if( connected_wifi() ) {
-        OTA_RUN();
     }
     offline_funcions();
 }
