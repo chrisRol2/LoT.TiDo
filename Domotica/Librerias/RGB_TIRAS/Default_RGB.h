@@ -1,5 +1,5 @@
 /*
-*	File:	
+*	File:	Default_RGB.h
 *	Author:	Christopher Roldan Sanchez
 *	Mail:	Christopher_Rol@hotmail.es
 *   Web:    https://www.lot-tido.com
@@ -22,5 +22,6 @@
 #define FLASH 3
 #define RANDOM 4
 #define PULSE 5
-
+#define ALARMCLOCK 20
 static const char ntpServerName[] = "us.pool.ntp.org";
+// local port to listen for UDP packets
