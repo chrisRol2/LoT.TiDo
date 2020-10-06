@@ -12,9 +12,27 @@
 #include "Lot.TiDo_Blynk_RGB.h"
 #include "reloj.h"
 #include "Default_RGB.h"
+
 reloj_calendario despertador(-3);
-
-
+char cadena[256];
+void setDespertador(int hora, int minuto, int diaSemana[7]) {
+	despertador.setHora(hora, minuto);
+	despertador.setWeekDay(diaSemana);
+}
+void setNombre(String cadena) {
+	char nombreDespertador[256];
+	cadena.toCharArray(nombreDespertador,256);
+	despertador.setName(nombreDespertador);
+}
+void setStateDespertador(bool state) {
+	if( state == 1 )despertador.enable();
+	else despertador.disable();
+}
+void RBG_STRIP::init() {
+	despertador.init();
+	terminal("Init.\n");
+	randomSeed(millis());
+}
 bool RBG_STRIP::compare(int color[3], int color2[3]) {
 	for( int i = 0; i < 3; i++ ) {
 		if( color[i] != color2[i] )return false;
@@ -22,6 +40,11 @@ bool RBG_STRIP::compare(int color[3], int color2[3]) {
 	return true;
 }
 void RBG_STRIP::set(int red, int green, int blue, int depth) {
+	//if( depth == 0 ) {
+	//	digitalWrite(red_pin, 0);
+	//	digitalWrite(green_pin, 0);
+	//	digitalWrite(blue_pin, 0);
+	//}
 	depth = pow(2, depth) - 1;
 
 	analogWrite(red_pin,
@@ -58,7 +81,7 @@ void RBG_STRIP::RGB(int color[3]) {
 	refresh();
 }
 void RBG_STRIP::on() {
-	status = true;
+	status = 1;
 	refresh();
 }
 void RBG_STRIP::off() {
@@ -92,6 +115,7 @@ void RBG_STRIP::random_color() {
 }
 void RBG_STRIP::fade(int color[50][3], int cantidad) {
 	static int dest = 0;
+	
 	if( firstloop ) {
 		firstloop = false;
 		modes_cont = 0;
@@ -106,6 +130,7 @@ void RBG_STRIP::fade(int color[50][3], int cantidad) {
 				colorFuncions[i]--;
 		}
 	} else {
+		if( dest == amanecerCant - 1 )return;
 		destCont++;
 		dest = destCont % cantidad;
 	}
@@ -129,8 +154,31 @@ void RBG_STRIP::pulse() {
 	brightness = (int) (509 * sin(modes_cont) + 514);
 	set(RED_VALUE, GREEN_VALUE, BLUE_VALUE, 8);
 }
+bool RBG_STRIP::alarmClock() {
+	static bool estado_anterior = 0;
+	static unsigned long delayNotify = 0;
+	
+		if( despertador.status() ) {
+			status = 1;
+			speed = 255;
+			mode(20);
+			if( noBlockDelay(&delayNotify, 5000) ) {
+				despertador.getName(cadena);
+				notify(cadena);
+			}
+			return true;
+		}
+		else if( estado_anterior != despertador.status() ) {
+			estado_anterior = despertador.status();
+			refreshBlynk();
+		}
+	return false;
+}
 void RBG_STRIP::refresh() {
 	static unsigned long delayModespeed = 0;
+	
+	if( alarmClock() )
+
 	if( mode_rgb != previus_mode ) {
 		firstloop = true;
 		previus_mode = mode_rgb;
@@ -157,16 +205,19 @@ void RBG_STRIP::refresh() {
 				if( noBlockDelayMicros(&delayModespeed, (speed * 1000) / 5) )
 					pulse();
 				break;
-			default:defaultMode();
+			case ALARMCLOCK:
+				if( noBlockDelayMicros(&delayModespeed, (speed * 1000) / 5) )
+					fade(amanecer, amanecerCant);
+				
+				break;
+			default:
+				defaultMode();
+				break;
 		}
 	}
-	else if( status == -1 ) {
-
-	}
 	else{
-		set(0, 0, 0, 8);
+		set(0, 0, 0, 1);
 	}
 }
 void RBG_STRIP::defaultMode() {
-
 }

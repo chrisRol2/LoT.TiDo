@@ -49,10 +49,11 @@ private:
 	void flash();
 	void random_color();
 	void pulse();
+	bool alarmClock();
 public:
 	RBG_STRIP(int _red_pin, int _green_pin, int _blue_pin):
-		red_pin(_red_pin), green_pin(_green_pin), blue_pin(_blue_pin) {
-	}
+		red_pin(_red_pin), green_pin(_green_pin), blue_pin(_blue_pin) {}
+	void init();
 	void RGB(int red, int green, int blue);
 	void RGB(int color[3]);
 	void on();
@@ -65,3 +66,6 @@ public:
 	void mode(int _mode_rgb);
 	void setSpeed(int _speed);
 };
+void setDespertador(int hora, int minuto, int diaSemana[7]);
+void setNombre(String cadena);
+void setStateDespertador(bool state);
