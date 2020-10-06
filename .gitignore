@@ -38,10 +38,12 @@ board.buildinfo
 *.exe
 *.out
 *.app
+*.pde
 
 #vs
 *.sou
 *.db
 *.xml
 *.*.xml
+*.suo
 /Domotica/.vs/Domotica/v16/Browse.VC.opendb
