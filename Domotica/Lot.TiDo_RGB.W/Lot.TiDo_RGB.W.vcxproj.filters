@@ -30,12 +30,6 @@
     <ClInclude Include="..\Lot.TiDo_4PlugR\LoT.TiDo_OTA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Default_RGB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Lot.TiDo_Blynk_RGB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Librerias\RGB_TIRAS\rgb_colors_Hue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -46,6 +40,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Librerias\Time-master\TimeLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Librerias\RGB_TIRAS\Default_RGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Librerias\RGB_TIRAS\Lot.TiDo_Blynk_RGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Librerias\RGB_TIRAS\emoji.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,13 +62,13 @@
     <ClCompile Include="..\Lot.TiDo_4PlugR\LoT.TiDo_OTA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Lot.TiDo_Blynk_RGB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Librerias\esp8266-SerialOTA-master\SerialOTA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Librerias\RGB_TIRAS\reloj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Librerias\RGB_TIRAS\Lot.TiDo_Blynk_RGB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
