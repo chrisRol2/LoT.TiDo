@@ -25,8 +25,8 @@
 class reloj_calendario{
 	private:
 
-		static int timeZone;     // Central European Time
-		int timeZone1;     // Central European Time
+		static const int timeZone = -3;
+		int timeZone1;
 		//hora
 		int horaAlarm;
 		int minutoAlarm;
@@ -35,16 +35,18 @@ class reloj_calendario{
 		int diaAlarm;
 		int mesAlarm;
 		int anioAlarm;
-		int diaSemanaAlarm;
+		int diaSemanaAlarm[7];
 		bool estado;
-		void getHora(char cadena[11]);
-		void getFecha(char cadena[11]);
 		static time_t getNtpTime();
+		char name[256];
 	public:
 		reloj_calendario(int _timeZone);
 		bool init();
 		void setHora(int _hora, int _minutos);
 		void setFecha(int _dia, int _dia_semana, int _mes, int _anio);
+		void setName(char _name[256]);
+		void setWeekDay(int week[7]);
+		void getName(char _name[256]);
 		int hora(void);
 		int minutos(void);
 		int segundos(void);
@@ -53,8 +55,11 @@ class reloj_calendario{
 		int mes(void);
 		int anio(void);
 		bool status(void);
+		bool enableButton(void);
 		void enable(void);
 		void disable(void);
+		void getHora(char cadena[11]);
+		void getFecha(char cadena[11]);
 };
 
 bool noBlockDelay(unsigned long *time, int delayMillis);
